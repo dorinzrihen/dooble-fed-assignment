@@ -2,37 +2,39 @@ import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import CharacterFilterTable from './components/CharacterFilterTable/CharacterFilterTable';
 import { useQuery } from '@tanstack/react-query';
 import {
-  filtersEnum,
+  FiltersEnum,
   TCharacterResponse,
   TFilters,
 } from './RickAndMortyCharacterPage.types';
 import { useState } from 'react';
 import './RickAndMortyCharacterPage.css'
 import RickAndMortyCharacterTable from './components/RickAndMortyCharacterTable/RickAndMortyCharacterTable';
+import { filtersInitState } from './RickAndMortyCharacterPageLib';
 
-export const filtersInitState = {
-  [filtersEnum.name]: '',
-  [filtersEnum.gender]: '',
-  [filtersEnum.status]: '',
-};
-
-const RickAndMortyCharacterPage = ({ }) => {
-  const [filters, setFilters] = useState<TFilters>(filtersInitState);
-  const [page, setPage] = useState<number>(1);
-
-  const queryResponse = useQuery<TCharacterResponse>({
+const useRickAndMortyCharacter = (filters: TFilters, page: number) => {
+  return useQuery({
     queryKey: ['character', filters, page],
     queryFn: () => {
       const params = new URLSearchParams(filters).toString();
-      console.log(params);
       return fetch(
         `https://rickandmortyapi.com/api/character/?page=${page}&${params}`
       ).then((res) => res.json());
     },
-    staleTime: 1000 * 60
+    staleTime: 1000 * 60,
+    select: (data: TCharacterResponse) => data.results.map(character => ({
+      ...character,
+      origin: character.origin.name
+    }))
   });
+}
 
-  const onChangeFilters = (key: keyof typeof filtersEnum, value: string) => {
+const RickAndMortyCharacterPage = () => {
+  const [filters, setFilters] = useState<TFilters>(filtersInitState);
+  const [page, setPage] = useState<number>(1);
+
+  const queryResponse = useRickAndMortyCharacter(filters, page);
+
+  const onChangeFilters = (key: keyof typeof FiltersEnum, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
 

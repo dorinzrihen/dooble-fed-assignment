@@ -1,9 +1,9 @@
 import { InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import SelectMenu from '../../../../components/Select/Select';
+import { SelectMenu } from '../../../../components/Select';
 import Button from '../../../../components/Button/Button';
-import { filtersEnum } from '../../RickAndMortyCharacterPage.types';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { FiltersEnum } from '../../RickAndMortyCharacterPage.types';
+import { ChangeEvent, useRef, useState } from 'react';
 import { debounce } from 'lodash';
 import './CharacterFilterTable.css';
 import { genderOptions, statusOptions } from './CharacterFilterTableLib';
@@ -17,12 +17,11 @@ const CharacterFilterTable = ({
 }: TCharacterFilterTable) => {
   const [search, setSearch] = useState<string>('');
 
-  const debouncedHandleChange = useCallback(
+  const debouncedHandleChange = useRef(
     debounce((value: string) => {
-      onChangeFilters(filtersEnum.name, value);
-    }, 1000),
-    []
-  );
+      onChangeFilters(FiltersEnum.name, value);
+    }, 1000)
+  ).current;
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -50,13 +49,13 @@ const CharacterFilterTable = ({
         <SelectMenu
           value={filters.gender}
           label="Gender"
-          onChange={(value: string) => onChangeFilters(filtersEnum.gender, value)}
+          onChange={(value: string) => onChangeFilters(FiltersEnum.gender, value)}
           options={genderOptions}
         />
         <SelectMenu
           value={filters.status}
           label="Status"
-          onChange={(value: string) => onChangeFilters(filtersEnum.status, value)}
+          onChange={(value: string) => onChangeFilters(FiltersEnum.status, value)}
           options={statusOptions}
         />
         <Button label={'Clear All'} onClick={handleClearFilters} />

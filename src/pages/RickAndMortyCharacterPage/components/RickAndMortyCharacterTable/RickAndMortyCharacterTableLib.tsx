@@ -1,13 +1,10 @@
-import { capitalize } from 'lodash';
-import { TCharacter, TCharacterKeys } from '../../RickAndMortyCharacterPage.types';
-
-export const capitalizeFirstLetter = (value: string) => capitalize(value);
+import { TCharacter, CharacterKeys } from '../../RickAndMortyCharacterPage.types';
 
 export const TableHeadersEnum: Array<keyof TCharacter> = [
-  TCharacterKeys.image,
-  TCharacterKeys.name,
-  TCharacterKeys.origin,
-  TCharacterKeys.status,
-  TCharacterKeys.species,
-  TCharacterKeys.type,
+  CharacterKeys.image,
+  CharacterKeys.name,
+  CharacterKeys.origin,
+  CharacterKeys.status,
+  CharacterKeys.species,
+  CharacterKeys.type,
 ];

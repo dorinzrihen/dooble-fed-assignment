@@ -4,7 +4,18 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './App.css';
 import RickAndMortyCharacterPage from './pages/RickAndMortyCharacterPage/RickAndMortyCharacterPage';
 
-const theme = createTheme();
+const theme = createTheme({
+  // components: {
+  //   MuiTableCell: {
+  //     styleOverrides: {
+  //       root: {
+  //         flex: 1,
+  //         display: 'flex',
+  //       }
+  //     }
+  //   }
+  // }
+});
 
 const queryClient = new QueryClient();
 

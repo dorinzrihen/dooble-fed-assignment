@@ -1,4 +1,4 @@
-export const TCharacterKeys = {
+export const CharacterKeys = {
   id: 'id',
   name: 'name',
   status: 'status',
@@ -13,7 +13,7 @@ export const TCharacterKeys = {
   created: 'created',
 } as const;
 
-export const filtersEnum = {
+export const FiltersEnum = {
   name: 'name',
   gender: 'gender',
   status: 'status'
@@ -33,24 +33,24 @@ export const GenderEnum = {
 } as const;
 
 export type TCharacter = {
-  [TCharacterKeys.id]: number;
-  [TCharacterKeys.name]: string;
-  [TCharacterKeys.status]: keyof typeof StatusEnum;
-  [TCharacterKeys.species]: string;
-  [TCharacterKeys.type]: string;
-  [TCharacterKeys.gender]: keyof typeof GenderEnum;
-  [TCharacterKeys.origin]: {
+  [CharacterKeys.id]: number;
+  [CharacterKeys.name]: string;
+  [CharacterKeys.status]: keyof typeof StatusEnum;
+  [CharacterKeys.species]: string;
+  [CharacterKeys.type]: string;
+  [CharacterKeys.gender]: keyof typeof GenderEnum;
+  [CharacterKeys.origin]: {
     name: string;
     url: string;
   };
-  [TCharacterKeys.location]: {
+  [CharacterKeys.location]: {
     name: string;
     url: string;
   };
-  [TCharacterKeys.image]: string;
-  [TCharacterKeys.episode]: string[];
-  [TCharacterKeys.url]: string;
-  [TCharacterKeys.created]: string;
+  [CharacterKeys.image]: string;
+  [CharacterKeys.episode]: string[];
+  [CharacterKeys.url]: string;
+  [CharacterKeys.created]: string;
 };
 
 export type TCharacterResponse = {
@@ -65,8 +65,8 @@ export type TCharacterResponse = {
 };
 
 export type TFilters = {
-  [filtersEnum.name]: string;
-  [filtersEnum.gender]: string;
-  [filtersEnum.status]: string;
+  [FiltersEnum.name]: string;
+  [FiltersEnum.gender]: string;
+  [FiltersEnum.status]: string;
 };
 

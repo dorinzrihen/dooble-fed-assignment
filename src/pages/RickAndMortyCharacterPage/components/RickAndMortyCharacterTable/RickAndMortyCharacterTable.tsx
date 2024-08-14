@@ -2,11 +2,10 @@ import { UseQueryResult } from '@tanstack/react-query';
 import TableWithPagination from '../../../../components/TableWithPagination/TableWithPagination';
 import {
   TCharacter,
-  TCharacterKeys,
+  CharacterKeys,
   TCharacterResponse,
 } from '../../RickAndMortyCharacterPage.types';
 import {
-  capitalizeFirstLetter,
   TableHeadersEnum,
 } from './RickAndMortyCharacterTableLib';
 import { CircleImage } from '../../../../components/CircleImage';
@@ -22,21 +21,13 @@ type TRickAndMortyCharacterTable = {
 
 const RickAndMortyCharacterTable = ({ queryResponse, page, onPageChange }: TRickAndMortyCharacterTable) => {
   const [selectedRow, setSelectedRow] = useState<TCharacter | null>(null)
-  const { data, isPending} = queryResponse
+  const { data, isPending } = queryResponse
 
   const characterTableConfig = {
-    headerCellCallback: {
-      [TCharacterKeys.image]: capitalizeFirstLetter,
-      [TCharacterKeys.name]: capitalizeFirstLetter,
-      [TCharacterKeys.origin]: capitalizeFirstLetter,
-      [TCharacterKeys.status]: capitalizeFirstLetter,
-      [TCharacterKeys.species]: capitalizeFirstLetter,
-      [TCharacterKeys.type]: capitalizeFirstLetter,
-    },
     bodyCellCallback: {
-      [TCharacterKeys.image]: (row: TCharacter) => <CircleImage alt={row.name} src={row[TCharacterKeys.image]} />,
-      [TCharacterKeys.origin]: (row: TCharacter) =>
-        row[TCharacterKeys.origin].name,
+      [CharacterKeys.image]: (row: TCharacter) => <CircleImage alt={row.name} src={row[CharacterKeys.image]} />,
+      [CharacterKeys.origin]: (row: TCharacter) =>
+        row[CharacterKeys.origin].name,
     },
     bodyRowCallback: {
       onClick: (row: TCharacter) => setSelectedRow(row)
@@ -57,9 +48,9 @@ const RickAndMortyCharacterTable = ({ queryResponse, page, onPageChange }: TRick
       error={data?.error}
     />
     <Modal open={Boolean(selectedRow)} onClose={handleCloseModal}>
-        <div>dorin</div>
+      <div>dorin</div>
     </Modal>
-  </> 
+  </>
 };
 
 export default RickAndMortyCharacterTable;

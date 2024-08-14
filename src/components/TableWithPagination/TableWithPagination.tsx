@@ -7,10 +7,11 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from '@mui/material';
 import { TTableWithPagination } from './TableWithPagination.types';
 import { ReactNode } from 'react';
+import TableRowError from './TableRowError';
+import { capitalize } from 'lodash';
 
 const TableWithPagination = <TRow,>({
   count,
@@ -27,8 +28,8 @@ const TableWithPagination = <TRow,>({
   const { headerCellCallback, bodyCellCallback, bodyRowCallback } = config
   return (
     <>
-      <TableContainer component={Paper} style={{ maxHeight: '75vh' }} >
-        <Table stickyHeader>
+      <TableContainer component={Paper} style={{ maxHeight: '75vh', height: '75vh' }} >
+        <Table stickyHeader style={{ height: '100%', tableLayout:'fixed'}}>
           <TableHead>
             <TableRow>
               {headers.map((header) => {
@@ -39,20 +40,14 @@ const TableWithPagination = <TRow,>({
                     : null;
                 return (
                   <TableCell key={`header-cell-${value}`}>
-                    {valueFromCallback ? valueFromCallback(value) : value}
+                    {valueFromCallback ? valueFromCallback(value) : capitalize(value)}
                   </TableCell>
                 );
               })}
             </TableRow>
           </TableHead>
           <TableBody>
-            {error ? <TableRow>
-              <TableCell colSpan={3} align="center">
-                <Typography variant="h4" color="textSecondary">
-                  {error}
-                </Typography>
-              </TableCell>
-            </TableRow>
+            {error ? <TableRowError text={error} colSpan={headers.length}/>
             : rows?.map((row, index) => (
               <TableRow key={index} onClick={() => bodyRowCallback.onClick(row)}>
                 {headers.map((key) => {
