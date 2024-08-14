@@ -20,7 +20,7 @@ const RickAndMortyCharacterPage = ({ }) => {
   const [filters, setFilters] = useState<TFilters>(filtersInitState);
   const [page, setPage] = useState<number>(1);
 
-  const queryResponse= useQuery<TCharacterResponse>({
+  const queryResponse = useQuery<TCharacterResponse>({
     queryKey: ['character', filters, page],
     queryFn: () => {
       const params = new URLSearchParams(filters).toString();
@@ -29,6 +29,7 @@ const RickAndMortyCharacterPage = ({ }) => {
         `https://rickandmortyapi.com/api/character/?page=${page}&${params}`
       ).then((res) => res.json());
     },
+    staleTime: 1000 * 60
   });
 
   const onChangeFilters = (key: keyof typeof filtersEnum, value: string) => {

@@ -23,6 +23,8 @@ const TableWithPagination = <TRow,>({
   isPending
 }: TTableWithPagination<TRow>) => {
   const onPaginationChange = (_: any, page: number) => onPageChange(page);
+
+  const { headerCellCallback, bodyCellCallback, bodyRowCallback } = config
   return (
     <>
       <TableContainer component={Paper} style={{ maxHeight: '75vh' }} >
@@ -32,8 +34,8 @@ const TableWithPagination = <TRow,>({
               {headers.map((header) => {
                 const value = header.toString();
                 const valueFromCallback =
-                  config?.headerCellCallback && header in config.headerCellCallback
-                    ? config.headerCellCallback[header]
+                headerCellCallback && header in headerCellCallback
+                    ? headerCellCallback[header]
                     : null;
                 return (
                   <TableCell key={`header-cell-${value}`}>
@@ -52,11 +54,11 @@ const TableWithPagination = <TRow,>({
               </TableCell>
             </TableRow>
             : rows?.map((row, index) => (
-              <TableRow key={index}>
+              <TableRow key={index} onClick={() => bodyRowCallback.onClick(row)}>
                 {headers.map((key) => {
                   const valueFromCallback =
-                    config?.bodyCellCallback && key in config.bodyCellCallback
-                      ? config.bodyCellCallback[key]
+                  bodyCellCallback && key in bodyCellCallback
+                      ? bodyCellCallback[key]
                       : null;
                   const value = key.toString();
                   const defaultValue = row[key] as ReactNode;
