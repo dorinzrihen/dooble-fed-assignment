@@ -1,8 +1,12 @@
-import { Button as MuiButton } from '@mui/material'
-import { TButton } from './Button.types'
+import { Button as MuiButton } from '@mui/material';
+import { TButton } from './Button.types';
 
-const Button = ({label, onClick}: TButton) => {
-    return <MuiButton onClick={onClick} variant="contained" size="large">{label}</MuiButton>
-}
+const Button = ({ label, onClick }: TButton) => {
+  return (
+    <MuiButton onClick={onClick} variant="contained" size="large">
+      {label}
+    </MuiButton>
+  );
+};
 
-export default Button
+export default Button;

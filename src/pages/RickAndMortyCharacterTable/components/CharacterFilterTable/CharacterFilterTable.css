@@ -1,0 +1,15 @@
+.characterFilterTable {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.characterFilterTable .headerSelectLine {
+  display: flex;
+  gap: 10px;
+}
+
+.characterFilterTable .headerSelectLine button {
+  width: 300px;
+}
