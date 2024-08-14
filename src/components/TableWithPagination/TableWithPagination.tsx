@@ -2,7 +2,7 @@ import { Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import { TTableWithPagination } from "./TableWithPagination.types"
 import { ReactNode } from "react"
 
-const TableWithPagination= <TRow,>({count, onPageChange, rows, config, headers}: TTableWithPagination<TRow>) => {
+const TableWithPagination= <TRow,>({count, onPageChange, rows, config, headers, page}: TTableWithPagination<TRow>) => {
 
     const onPaginationChange = (_: any, page: number) => onPageChange(page)
 
@@ -35,7 +35,7 @@ const TableWithPagination= <TRow,>({count, onPageChange, rows, config, headers}:
                 ))}
             </TableBody>
             </Table>
-            <Pagination count={count} size="small" onChange={onPaginationChange} />
+            <Pagination page={page} count={count} size="small" onChange={onPaginationChange} />
       </TableContainer>
     )
 }

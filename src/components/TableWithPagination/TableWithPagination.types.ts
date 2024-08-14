@@ -9,4 +9,5 @@ export type TTableWithPagination<TRow> = {
         bodyCallback?: Partial<{ [key in keyof TRow]: (row: TRow, key: string) => ReactNode }>
     }
     headers: Array<keyof TRow>
+    page: number
 }

@@ -14,13 +14,14 @@ const filtersInitState = {
 
 const RickAndMortyCharacterTable = ({}) => {
   const [filters, setFilters] = useState<TFilters>(filtersInitState)
+  const [page, setPage] = useState<number>(1)
 
     const { isPending, error, data } = useQuery<TCharacterResponse>({
-      queryKey: ['repoData', filters],
+      queryKey: ['repoData', filters, page],
       queryFn: () => {
-        const params = new URLSearchParams(filters as any).toString();
+        const params = new URLSearchParams(filters).toString();
         console.log(params)
-        return fetch(`https://rickandmortyapi.com/api/character/?${params}`).then(
+        return fetch(`https://rickandmortyapi.com/api/character/?page=${page}&${params}`).then(
           (res) => res.json()
         )
       },
@@ -28,6 +29,10 @@ const RickAndMortyCharacterTable = ({}) => {
 
     const onChangeFilters = (key: string, value: string) => {
         setFilters(prev => ({...prev, [key]: value}))
+    }
+
+    const onPageChange = (newPageNumber: number) => {
+      setPage(newPageNumber)
     }
 
     const handleClearFilters = () => setFilters(filtersInitState)
@@ -54,8 +59,9 @@ const RickAndMortyCharacterTable = ({}) => {
           <>
             <CharacterFilterTable onChangeFilters={onChangeFilters} handleClearFilters={handleClearFilters} filters={filters}/>
             <TableWithPagination<TCharacter>
-              count={data?.info.pages} 
-              onPageChange={() => {}}
+              count={data?.info.pages}
+              page={page}
+              onPageChange={onPageChange}
               rows={data.results}
               headers={TableHeadersEnum}
               config={characterTableConfig}
