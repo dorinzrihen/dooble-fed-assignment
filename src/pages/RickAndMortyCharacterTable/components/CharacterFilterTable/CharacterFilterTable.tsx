@@ -16,7 +16,7 @@ const statusOptions = [
     {name: 'unknown', value: 'unknown'},
 ]
 
-const CharacterFilterTable = ({ }) => {
+const CharacterFilterTable = ({}) => {
     return (
         <div>
             <TextField label="Search" variant="outlined" InputProps={{endAdornment: <InputAdornment position="end"><SearchIcon/></InputAdornment>}}/>

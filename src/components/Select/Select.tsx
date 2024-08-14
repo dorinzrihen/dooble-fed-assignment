@@ -8,16 +8,18 @@ const SelectMenu = ({onChange, label, value, options}: TSelectMenu) => {
         onChange(event.target.value);
     };
 
-    return <FormControl>
-    <InputLabel>Gender</InputLabel>
-    <Select
-        value={value}
-        label={label}
-        onChange={handleChange}
-    >
-        {options.map(({value, name}) => <MenuItem value={value}>{name}</MenuItem>)}
-    </Select>
-    </FormControl>
+    return (
+        <FormControl>
+            <InputLabel>Gender</InputLabel>
+            <Select
+                value={value}
+                label={label}
+                onChange={handleChange}
+            >
+                {options.map(({value, name}) => <MenuItem key={value} value={value}>{name}</MenuItem>)}
+            </Select>
+        </FormControl>
+    )
 }
 
 export default SelectMenu
