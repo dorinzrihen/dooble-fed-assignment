@@ -2,28 +2,60 @@ import { InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import SelectMenu from '../../../../components/Select/Select';
 import Button from '../../../../components/Button/Button';
+import { GenderEnum, StatusEnum, TFilters } from '../../RickAndMortyCharacterTable.types';
+import { ChangeEvent, useCallback, useState } from 'react';
+import { capitalize, debounce } from 'lodash';
 
-const genderOptions = [
-    {name: 'female', value: 'female'},
-    {name: 'male', value: 'male'},
-    {name: 'genderless', value: 'genderless'},
-    {name: 'unknown', value: 'unknown'},
-]
 
-const statusOptions = [
-    {name: 'alive', value: 'alive'},
-    {name: 'dead', value: 'dead'},
-    {name: 'unknown', value: 'unknown'},
-]
+type TCharacterFilterTable = {
+    onChangeFilters: (key: string, value: string) => void
+    handleClearFilters: () => void
+    filters: TFilters
+}
 
-const CharacterFilterTable = ({}) => {
+const getSelectOptions = (arrOptions: string[]) => {
+    return arrOptions.map(option => ({name: capitalize(option), value: option}))
+}
+
+const genderOptions = getSelectOptions(Object.values(GenderEnum))
+const statusOptions = getSelectOptions(Object.values(StatusEnum))
+
+
+const CharacterFilterTable = ({onChangeFilters, handleClearFilters, filters}: TCharacterFilterTable) => {
+    const [search, setSearch] = useState<string>('')
+
+    const handleChangeGender = (value: string) =>  onChangeFilters('gender', value)
+    const handleChangeStatus = (value: string) =>  onChangeFilters('status', value)
+
+    const debouncedHandleChange = useCallback(
+        debounce((value: string) => {
+            onChangeFilters('name', value);
+        }, 1000),
+        []
+      );
+
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSearch(value);
+        debouncedHandleChange(value)
+    };
+
     return (
         <div>
-            <TextField label="Search" variant="outlined" InputProps={{endAdornment: <InputAdornment position="end"><SearchIcon/></InputAdornment>}}/>
+            <TextField 
+                fullWidth 
+                value={search} 
+                label="Search" 
+                variant="outlined"
+                onChange={onChange}
+                InputProps={{endAdornment: <InputAdornment position="end">
+                    <SearchIcon/>
+                </InputAdornment>}}
+            />
             <div>
-                <SelectMenu value='' label='Gender' onChange={() => {}} options={genderOptions}/>
-                <SelectMenu value='' label='Status' onChange={() => {}} options={statusOptions}/>
-                <Button label={'Clear All'} onClick={() => {}}/>
+                <SelectMenu value={filters.gender} label='Gender' onChange={handleChangeGender} options={genderOptions}/>
+                <SelectMenu value={filters.status} label='Status' onChange={handleChangeStatus} options={statusOptions}/>
+                <Button label={'Clear All'} onClick={handleClearFilters}/>
             </div>
         </div>
     )

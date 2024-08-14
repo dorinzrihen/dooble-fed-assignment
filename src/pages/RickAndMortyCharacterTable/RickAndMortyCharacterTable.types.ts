@@ -13,13 +13,13 @@ export const TCharacterKeys = {
     created: 'created',
 } as const;
 
-export const TStatus = {
+export const StatusEnum = {
     Alive: 'Alive',
     Dead: 'Dead',
     unknown: 'unknown'
 } as const
 
-export const TGender = {
+export const GenderEnum = {
     Female: 'Female',
     Male: 'Male',
     Genderless: 'Genderless',
@@ -29,10 +29,10 @@ export const TGender = {
 export type TCharacter = {
     [TCharacterKeys.id]: number;
     [TCharacterKeys.name]: string;
-    [TCharacterKeys.status]: keyof typeof TStatus;
+    [TCharacterKeys.status]: keyof typeof StatusEnum;
     [TCharacterKeys.species]: string;
     [TCharacterKeys.type]: string;
-    [TCharacterKeys.gender]: keyof typeof TGender;
+    [TCharacterKeys.gender]: keyof typeof GenderEnum;
     [TCharacterKeys.origin]: {
         name: string;
         url: string;
@@ -55,4 +55,10 @@ export type TCharacterResponse = {
         prev: string | null;
     };
     results: TCharacter[];
+}
+
+export type TFilters = {
+    name: string
+    gender: string
+    status: string
 }

@@ -1,6 +1,6 @@
 export type TSelectMenu = {
-    onChange: (value: string | number) => void
+    onChange: (value: string) => void
     label: string
     value: string
-    options: { value: string | number, name: string }[]
+    options: { value: string, name: string }[]
 }

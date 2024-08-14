@@ -2,17 +2,35 @@ import { AppBar, Box, Toolbar, Typography } from "@mui/material"
 import CharacterFilterTable from "./components/CharacterFilterTable/CharacterFilterTable"
 import { useQuery } from "@tanstack/react-query"
 import TableWithPagination from "../../components/TableWithPagination/TableWithPagination"
-import { TCharacter, TCharacterResponse } from "./RickAndMortyCharacterTable.types"
+import { TCharacter, TCharacterResponse, TFilters } from "./RickAndMortyCharacterTable.types"
 import { characterTableConfig, TableHeadersEnum } from "./RickAndMortyCharacterTableLib"
+import { useState } from "react"
+
+const filtersInitState = {
+  name: '',
+  gender: '',
+  status: ''
+}
 
 const RickAndMortyCharacterTable = ({}) => {
+  const [filters, setFilters] = useState<TFilters>(filtersInitState)
+
     const { isPending, error, data } = useQuery<TCharacterResponse>({
-      queryKey: ['repoData'],
-      queryFn: () =>
-        fetch('https://rickandmortyapi.com/api/character/?page=2').then((res) =>
-          res.json(),
-        ),
+      queryKey: ['repoData', filters],
+      queryFn: () => {
+        const params = new URLSearchParams(filters as any).toString();
+        console.log(params)
+        return fetch(`https://rickandmortyapi.com/api/character/?${params}`).then(
+          (res) => res.json()
+        )
+      },
     })
+
+    const onChangeFilters = (key: string, value: string) => {
+        setFilters(prev => ({...prev, [key]: value}))
+    }
+
+    const handleClearFilters = () => setFilters(filtersInitState)
 
     if(!isPending && !data) {
       return <div>No data</div>
@@ -34,7 +52,7 @@ const RickAndMortyCharacterTable = ({}) => {
         isPending
           ? <div>spinner</div> : 
           <>
-            <CharacterFilterTable/>
+            <CharacterFilterTable onChangeFilters={onChangeFilters} handleClearFilters={handleClearFilters} filters={filters}/>
             <TableWithPagination<TCharacter>
               count={data?.info.pages} 
               onPageChange={() => {}}
