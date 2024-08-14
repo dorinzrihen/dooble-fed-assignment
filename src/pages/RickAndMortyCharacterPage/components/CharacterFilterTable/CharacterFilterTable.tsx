@@ -2,30 +2,13 @@ import { InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import SelectMenu from '../../../../components/Select/Select';
 import Button from '../../../../components/Button/Button';
-import {
-  GenderEnum,
-  StatusEnum,
-  TFilters,
-} from '../../RickAndMortyCharacterTable.types';
+import { filtersEnum } from '../../RickAndMortyCharacterPage.types';
 import { ChangeEvent, useCallback, useState } from 'react';
-import { capitalize, debounce } from 'lodash';
+import { debounce } from 'lodash';
 import './CharacterFilterTable.css';
+import { genderOptions, statusOptions } from './CharacterFilterTableLib';
+import { TCharacterFilterTable } from './CharacterFilterTable.types';
 
-type TCharacterFilterTable = {
-  onChangeFilters: (key: string, value: string) => void;
-  handleClearFilters: () => void;
-  filters: TFilters;
-};
-
-const getSelectOptions = (arrOptions: string[]) => {
-  return arrOptions.map((option) => ({
-    name: capitalize(option),
-    value: option,
-  }));
-};
-
-const genderOptions = getSelectOptions(Object.values(GenderEnum));
-const statusOptions = getSelectOptions(Object.values(StatusEnum));
 
 const CharacterFilterTable = ({
   onChangeFilters,
@@ -34,14 +17,9 @@ const CharacterFilterTable = ({
 }: TCharacterFilterTable) => {
   const [search, setSearch] = useState<string>('');
 
-  const handleChangeGender = (value: string) =>
-    onChangeFilters('gender', value);
-  const handleChangeStatus = (value: string) =>
-    onChangeFilters('status', value);
-
   const debouncedHandleChange = useCallback(
     debounce((value: string) => {
-      onChangeFilters('name', value);
+      onChangeFilters(filtersEnum.name, value);
     }, 1000),
     []
   );
@@ -72,13 +50,13 @@ const CharacterFilterTable = ({
         <SelectMenu
           value={filters.gender}
           label="Gender"
-          onChange={handleChangeGender}
+          onChange={(value: string) => onChangeFilters(filtersEnum.gender, value)}
           options={genderOptions}
         />
         <SelectMenu
           value={filters.status}
           label="Status"
-          onChange={handleChangeStatus}
+          onChange={(value: string) => onChangeFilters(filtersEnum.status, value)}
           options={statusOptions}
         />
         <Button label={'Clear All'} onClick={handleClearFilters} />

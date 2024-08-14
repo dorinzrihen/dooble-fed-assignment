@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import './App.css';
-import RickAndMortyCharacterTable from './pages/RickAndMortyCharacterTable/RickAndMortyCharacterTable';
+import RickAndMortyCharacterPage from './pages/RickAndMortyCharacterPage/RickAndMortyCharacterPage';
 
 const theme = createTheme();
 
@@ -12,7 +12,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <RickAndMortyCharacterTable />
+        <RickAndMortyCharacterPage />
       </QueryClientProvider>
     </ThemeProvider>
   );

@@ -1,30 +1,27 @@
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import CharacterFilterTable from './components/CharacterFilterTable/CharacterFilterTable';
 import { useQuery } from '@tanstack/react-query';
-import TableWithPagination from '../../components/TableWithPagination/TableWithPagination';
 import {
-  TCharacter,
+  filtersEnum,
   TCharacterResponse,
   TFilters,
-} from './RickAndMortyCharacterTable.types';
-import {
-  characterTableConfig,
-  TableHeadersEnum,
-} from './RickAndMortyCharacterTableLib';
+} from './RickAndMortyCharacterPage.types';
 import { useState } from 'react';
+import './RickAndMortyCharacterPage.css'
+import RickAndMortyCharacterTable from './components/RickAndMortyCharacterTable/RickAndMortyCharacterTable';
 
-const filtersInitState = {
-  name: '',
-  gender: '',
-  status: '',
+export const filtersInitState = {
+  [filtersEnum.name]: '',
+  [filtersEnum.gender]: '',
+  [filtersEnum.status]: '',
 };
 
-const RickAndMortyCharacterTable = ({}) => {
+const RickAndMortyCharacterPage = ({ }) => {
   const [filters, setFilters] = useState<TFilters>(filtersInitState);
   const [page, setPage] = useState<number>(1);
 
-  const { isPending, error, data } = useQuery<TCharacterResponse>({
-    queryKey: ['repoData', filters, page],
+  const queryResponse= useQuery<TCharacterResponse>({
+    queryKey: ['character', filters, page],
     queryFn: () => {
       const params = new URLSearchParams(filters).toString();
       console.log(params);
@@ -34,7 +31,7 @@ const RickAndMortyCharacterTable = ({}) => {
     },
   });
 
-  const onChangeFilters = (key: string, value: string) => {
+  const onChangeFilters = (key: keyof typeof filtersEnum, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -44,12 +41,8 @@ const RickAndMortyCharacterTable = ({}) => {
 
   const handleClearFilters = () => setFilters(filtersInitState);
 
-  if (!isPending && !data) {
-    return <div>No data</div>;
-  }
-
   return (
-    <div>
+    <div className='rickAndMortyCharacterPage'>
       <div>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
@@ -61,27 +54,16 @@ const RickAndMortyCharacterTable = ({}) => {
           </AppBar>
         </Box>
       </div>
-      {isPending ? (
-        <div>spinner</div>
-      ) : (
-        <>
-          <CharacterFilterTable
-            onChangeFilters={onChangeFilters}
-            handleClearFilters={handleClearFilters}
-            filters={filters}
-          />
-          <TableWithPagination<TCharacter>
-            count={data?.info.pages}
-            page={page}
-            onPageChange={onPageChange}
-            rows={data.results}
-            headers={TableHeadersEnum}
-            config={characterTableConfig}
-          />
-        </>
-      )}
+      <div className='pageBody'>
+        <CharacterFilterTable
+          onChangeFilters={onChangeFilters}
+          handleClearFilters={handleClearFilters}
+          filters={filters}
+        />
+        <RickAndMortyCharacterTable queryResponse={queryResponse} page={page} onPageChange={onPageChange} />
+      </div>
     </div>
   );
 };
 
-export default RickAndMortyCharacterTable;
+export default RickAndMortyCharacterPage;

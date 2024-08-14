@@ -1,5 +1,6 @@
 import { capitalize } from 'lodash';
-import { TCharacter, TCharacterKeys } from './RickAndMortyCharacterTable.types';
+import { filtersEnum, TCharacter, TCharacterKeys } from '../../RickAndMortyCharacterPage.types';
+import CircleImage from '../../../../components/CircleImage/CircleImage';
 
 const capitalizeFirstLetter = (value: string) => capitalize(value);
 
@@ -13,7 +14,7 @@ export const TableHeadersEnum: Array<keyof TCharacter> = [
 ];
 
 export const characterTableConfig = {
-  headerCallback: {
+  headerCellCallback: {
     [TCharacterKeys.image]: capitalizeFirstLetter,
     [TCharacterKeys.name]: capitalizeFirstLetter,
     [TCharacterKeys.origin]: capitalizeFirstLetter,
@@ -21,11 +22,12 @@ export const characterTableConfig = {
     [TCharacterKeys.species]: capitalizeFirstLetter,
     [TCharacterKeys.type]: capitalizeFirstLetter,
   },
-  bodyCallback: {
-    [TCharacterKeys.image]: (row: TCharacter) => (
-      <img alt={row.name} src={row[TCharacterKeys.image]} />
-    ),
+  bodyCellCallback: {
+    [TCharacterKeys.image]: (row: TCharacter) => <CircleImage alt={row.name} src={row[TCharacterKeys.image]} />,
     [TCharacterKeys.origin]: (row: TCharacter) =>
       row[TCharacterKeys.origin].name,
   },
+  // bodyRowCallback: {
+  //   onClick: (row: TCharacter) => 
+  // }
 };

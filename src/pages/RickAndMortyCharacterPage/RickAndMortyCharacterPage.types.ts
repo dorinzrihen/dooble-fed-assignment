@@ -13,6 +13,12 @@ export const TCharacterKeys = {
   created: 'created',
 } as const;
 
+export const filtersEnum = {
+  name: 'name',
+  gender: 'gender',
+  status: 'status'
+} as const
+
 export const StatusEnum = {
   Alive: 'Alive',
   Dead: 'Dead',
@@ -55,10 +61,12 @@ export type TCharacterResponse = {
     prev: string | null;
   };
   results: TCharacter[];
+  error?: string;
 };
 
 export type TFilters = {
-  name: string;
-  gender: string;
-  status: string;
+  [filtersEnum.name]: string;
+  [filtersEnum.gender]: string;
+  [filtersEnum.status]: string;
 };
+
