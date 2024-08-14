@@ -1,12 +1,12 @@
 import { ReactNode } from "react"
 
-export type TTableWithPagination<THeaders extends string> = {
+export type TTableWithPagination<TRow> = {
     count: number
-    onPageChange: (pageNumber: number) => any 
-    rows: {[key in THeaders]: ReactNode}[] 
+    onPageChange: (pageNumber: number) => any
+    rows: TRow[]
     config?: {
-        headerCallback?: {[key in THeaders]: (value: string) => ReactNode}
-        bodyCallback?: {[key in THeaders]: (row: {[key in THeaders]: ReactNode}, key: string) => ReactNode}
+        headerCallback?: Partial<{ [key in keyof TRow]: (value: string) => ReactNode }>
+        bodyCallback?: Partial<{ [key in keyof TRow]: (row: TRow, key: string) => ReactNode }>
     }
-    headers: THeaders[]
+    headers: Array<keyof TRow>
 }

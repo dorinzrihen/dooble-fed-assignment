@@ -2,25 +2,8 @@ import { AppBar, Box, Toolbar, Typography } from "@mui/material"
 import CharacterFilterTable from "./components/CharacterFilterTable/CharacterFilterTable"
 import { useQuery } from "@tanstack/react-query"
 import TableWithPagination from "../../components/TableWithPagination/TableWithPagination"
-import { TableHeadersEnum, TCharacterResponse } from "./RickAndMortyCharacterTable.types"
-import { capitalize } from 'lodash'
-
-const capitalizeFirstLetter = (value: string) => capitalize(value)
-
-const config = {
-  headerCallback: {
-    [TableHeadersEnum.image]: capitalizeFirstLetter,
-    [TableHeadersEnum.name]: capitalizeFirstLetter,
-    [TableHeadersEnum.origin]: capitalizeFirstLetter,
-    [TableHeadersEnum.status]: capitalizeFirstLetter,
-    [TableHeadersEnum.species]: capitalizeFirstLetter,
-    [TableHeadersEnum.type]: capitalizeFirstLetter,
-  },
-  bodyCallback: {
-    [TableHeadersEnum.image]: (row: any, key: string) => <img alt={row.name} src={row[key]}/>,
-    [TableHeadersEnum.origin]: (row: any, key: string) => row[key].name,
-  }
-}
+import { TCharacter, TCharacterResponse } from "./RickAndMortyCharacterTable.types"
+import { characterTableConfig, TableHeadersEnum } from "./RickAndMortyCharacterTableLib"
 
 const RickAndMortyCharacterTable = ({}) => {
     const { isPending, error, data } = useQuery<TCharacterResponse>({
@@ -52,12 +35,12 @@ const RickAndMortyCharacterTable = ({}) => {
           ? <div>spinner</div> : 
           <>
             <CharacterFilterTable/>
-            <TableWithPagination 
+            <TableWithPagination<TCharacter>
               count={data?.info.pages} 
               onPageChange={() => {}}
               rows={data.results}
-              headers={Object.keys(TableHeadersEnum)}
-              config={config}
+              headers={TableHeadersEnum}
+              config={characterTableConfig}
             />
           </>
       }

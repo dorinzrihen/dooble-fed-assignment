@@ -1,11 +1,17 @@
-export const TableHeadersEnum = {
-    image: 'image',
+export const TCharacterKeys = {
+    id: 'id',
     name: 'name',
-    origin: 'origin',
     status: 'status',
     species: 'species',
     type: 'type',
-}
+    gender: 'gender',
+    origin: 'origin',
+    location: 'location',
+    image: 'image',
+    episode: 'episode',
+    url: 'url',
+    created: 'created',
+} as const;
 
 export const TStatus = {
     Alive: 'Alive',
@@ -20,26 +26,26 @@ export const TGender = {
     unknown: 'unknown'
 } as const
 
-type TCharacter = {
-    id: number
-    name: string
-    status: keyof typeof TStatus
-    species: string
-    type: string
-    gender: keyof typeof TGender
-    origin: {
-        name: string
-        url: string
-    }
-    location: {
-        name: string
-        url: string
-    }
-    image: string
-    episode: string[]
-    url: string;
-    created: string
-}
+export type TCharacter = {
+    [TCharacterKeys.id]: number;
+    [TCharacterKeys.name]: string;
+    [TCharacterKeys.status]: keyof typeof TStatus;
+    [TCharacterKeys.species]: string;
+    [TCharacterKeys.type]: string;
+    [TCharacterKeys.gender]: keyof typeof TGender;
+    [TCharacterKeys.origin]: {
+        name: string;
+        url: string;
+    };
+    [TCharacterKeys.location]: {
+        name: string;
+        url: string;
+    };
+    [TCharacterKeys.image]: string;
+    [TCharacterKeys.episode]: string[];
+    [TCharacterKeys.url]: string;
+    [TCharacterKeys.created]: string;
+};
   
 export type TCharacterResponse = {
     info: {
