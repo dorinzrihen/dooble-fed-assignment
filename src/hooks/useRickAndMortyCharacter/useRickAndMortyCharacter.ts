@@ -1,7 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import {
-  TFilters,
-} from '../../pages/RickAndMortyCharacterPage/RickAndMortyCharacterPage.types';
+import { TFilters } from '../../pages/RickAndMortyCharacterPage/RickAndMortyCharacterPage.types';
 import { CharacterResponse } from './useRickAndMortyCharacter.types';
 
 const useRickAndMortyCharacter = (filters: TFilters, page: number) => {

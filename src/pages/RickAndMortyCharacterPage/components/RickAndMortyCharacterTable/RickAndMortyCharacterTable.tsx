@@ -1,13 +1,14 @@
 import { TableWithPagination } from '../../../../components/TableWithPagination';
-import {
-  isValidCharacterResponse,
-} from '../../RickAndMortyCharacterPage.types';
+import { isValidCharacterResponse } from '../../RickAndMortyCharacterPage.types';
 import { TableHeadersEnum } from './RickAndMortyCharacterTableLib';
 import { CircleImage } from '../../../../components/CircleImage';
 import { useState } from 'react';
 import CharacterModal from '../CharacterModal/CharacterModal';
 import { TRickAndMortyCharacterTable } from './RickAndMortyCharacterTable.types';
-import { Character, CharacterKeys } from '../../../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types';
+import {
+  Character,
+  CharacterKeys,
+} from '../../../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types';
 
 const RickAndMortyCharacterTable = ({
   data,

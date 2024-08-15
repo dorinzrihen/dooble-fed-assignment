@@ -10,7 +10,7 @@ type Config<TRow> = {
   bodyRowCallback?: {
     onClick?: (row: TRow) => void;
   };
-  tableHeight: string
+  tableHeight: string;
 };
 
 export type DynamicTableBodyProps<TRow> = {
@@ -33,4 +33,3 @@ export type DynamicTableRowProps<TRow> = {
   keys: Array<keyof TRow>;
   config: Config<TRow>;
 };
-

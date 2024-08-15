@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
+import { Episode } from './useRickAndMortyEpisode.types';
 
-const useRickAndMortyEpisodes = (endpoint: string | undefined) => {
-  return useQuery({
+const useRickAndMortyEpisode = (endpoint: string | undefined) => {
+  return useQuery<Episode>({
     queryKey: ['episodes', endpoint],
     queryFn: async () => {
       if (endpoint) {
@@ -13,4 +14,4 @@ const useRickAndMortyEpisodes = (endpoint: string | undefined) => {
   });
 };
 
-export default useRickAndMortyEpisodes;
+export default useRickAndMortyEpisode;

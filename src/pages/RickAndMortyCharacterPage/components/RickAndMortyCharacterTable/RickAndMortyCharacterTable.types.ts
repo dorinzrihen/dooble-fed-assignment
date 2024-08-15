@@ -1,4 +1,4 @@
-import { CharacterResponse } from "../../../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types";
+import { CharacterResponse } from '../../../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types';
 
 export type TRickAndMortyCharacterTable = {
   data: CharacterResponse;

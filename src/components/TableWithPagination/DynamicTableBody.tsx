@@ -10,7 +10,6 @@ const DynamicTableBody = <TRow,>({
   isPending,
 }: DynamicTableBodyProps<TRow>) => {
   if (isPending || error) {
-
     return (
       <TableBody>
         <TableRow>

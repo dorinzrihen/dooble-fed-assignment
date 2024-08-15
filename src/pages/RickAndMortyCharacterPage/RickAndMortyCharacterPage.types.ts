@@ -1,4 +1,7 @@
-import { CharacterResponse, CharacterValidResponse } from "../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types";
+import {
+  CharacterResponse,
+  CharacterValidResponse,
+} from '../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types';
 
 export const FiltersEnum = {
   name: 'name',
