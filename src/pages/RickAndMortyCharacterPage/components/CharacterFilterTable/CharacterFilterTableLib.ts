@@ -1,5 +1,5 @@
 import { capitalize } from 'lodash';
-import { GenderEnum, StatusEnum } from '../../RickAndMortyCharacterPage.types';
+import { GenderEnum, StatusEnum } from '../../../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types';
 
 const getSelectOptions = (arrOptions: string[]) => {
   return arrOptions.map((option) => ({

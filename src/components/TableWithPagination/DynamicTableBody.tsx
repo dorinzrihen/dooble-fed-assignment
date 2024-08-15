@@ -1,7 +1,6 @@
 import { TableBody, TableCell, TableRow, Typography } from '@mui/material';
 import DynamicTableRow from './DynamicTableRow';
 import { DynamicTableBodyProps } from './TableWithPagination.types';
-import { getMaxTableHeight } from './TableWithPaginationLib';
 
 const DynamicTableBody = <TRow,>({
   headers,
@@ -11,14 +10,14 @@ const DynamicTableBody = <TRow,>({
   isPending,
 }: DynamicTableBodyProps<TRow>) => {
   if (isPending || error) {
-    const tableHeight = getMaxTableHeight();
+
     return (
       <TableBody>
         <TableRow>
           <TableCell
             colSpan={headers.length}
             align="center"
-            sx={{ padding: 0, height: `calc(${tableHeight} - 60px)` }}
+            sx={{ padding: 0, height: `calc(${config?.tableHeight} - 60px)` }}
           >
             {error ? (
               <Typography variant="h4">{error}</Typography>

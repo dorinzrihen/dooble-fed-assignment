@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import {
-  CharacterResponse,
   TFilters,
-} from '../pages/RickAndMortyCharacterPage/RickAndMortyCharacterPage.types';
+} from '../../pages/RickAndMortyCharacterPage/RickAndMortyCharacterPage.types';
+import { CharacterResponse } from './useRickAndMortyCharacter.types';
 
 const useRickAndMortyCharacter = (filters: TFilters, page: number) => {
   return useQuery<CharacterResponse>({

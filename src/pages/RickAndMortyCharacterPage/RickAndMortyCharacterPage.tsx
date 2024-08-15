@@ -5,7 +5,7 @@ import { useState } from 'react';
 import './RickAndMortyCharacterPage.css';
 import RickAndMortyCharacterTable from './components/RickAndMortyCharacterTable/RickAndMortyCharacterTable';
 import { filtersInitState } from './RickAndMortyCharacterPageLib';
-import useRickAndMortyCharacter from '../../hooks/useRickAndMortyCharacter';
+import useRickAndMortyCharacter from '../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter';
 
 const RickAndMortyCharacterPage = () => {
   const [filters, setFilters] = useState<TFilters>(filtersInitState);

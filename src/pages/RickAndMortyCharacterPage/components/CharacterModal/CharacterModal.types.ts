@@ -1,4 +1,4 @@
-import { Character } from '../../RickAndMortyCharacterPage.types';
+import { Character } from "../../../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types";
 
 export type CharacterModalProps = {
   rowData: Character;

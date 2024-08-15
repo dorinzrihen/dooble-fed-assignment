@@ -1,7 +1,5 @@
-import {
-  Character,
-  CharacterKeys,
-} from '../../RickAndMortyCharacterPage.types';
+import { Character, CharacterKeys } from "../../../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types";
+
 
 export const TableHeadersEnum: Array<keyof Character> = [
   CharacterKeys.image,

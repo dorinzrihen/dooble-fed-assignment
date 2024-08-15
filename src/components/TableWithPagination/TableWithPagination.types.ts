@@ -10,29 +10,27 @@ type Config<TRow> = {
   bodyRowCallback?: {
     onClick?: (row: TRow) => void;
   };
+  tableHeight: string
+};
+
+export type DynamicTableBodyProps<TRow> = {
+  rows: TRow[] | null;
+  headers: Array<keyof TRow>;
+  config: Config<TRow>;
+  error: string | null;
+  isPending: boolean;
 };
 
 export type TableWithPaginationProps<TRow> = {
   pages: number | null;
   onPageChange: (pageNumber: number) => void;
   rows: TRow[] | null;
-  config?: Config<TRow>;
-  headers: Array<keyof TRow>;
   page: number;
-  isPending: boolean;
-  error: string | null;
-};
+} & DynamicTableBodyProps<TRow>;
 
 export type DynamicTableRowProps<TRow> = {
   row: TRow;
   keys: Array<keyof TRow>;
-  config?: Config<TRow>;
+  config: Config<TRow>;
 };
 
-export type DynamicTableBodyProps<TRow> = {
-  rows: TRow[] | null;
-  headers: Array<keyof TRow>;
-  config?: Config<TRow>;
-  error?: string | null;
-  isPending: boolean;
-};

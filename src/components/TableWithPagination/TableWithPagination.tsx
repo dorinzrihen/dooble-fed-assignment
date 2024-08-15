@@ -12,7 +12,6 @@ import { TableWithPaginationProps } from './TableWithPagination.types';
 import { capitalize } from 'lodash';
 import { ChangeEvent } from 'react';
 import DynamicTableBody from './DynamicTableBody';
-import { getMaxTableHeight } from './TableWithPaginationLib';
 import { colors } from '../../context/theme';
 
 const TableWithPagination = <TRow,>({
@@ -29,7 +28,7 @@ const TableWithPagination = <TRow,>({
     onPageChange(page);
   const headerCellCallback = config?.headerCellCallback;
 
-  const maxTableSize = getMaxTableHeight();
+  const maxTableSize = config.tableHeight;
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>

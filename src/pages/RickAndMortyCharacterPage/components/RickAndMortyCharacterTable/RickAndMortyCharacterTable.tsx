@@ -1,7 +1,5 @@
 import { TableWithPagination } from '../../../../components/TableWithPagination';
 import {
-  Character,
-  CharacterKeys,
   isValidCharacterResponse,
 } from '../../RickAndMortyCharacterPage.types';
 import { TableHeadersEnum } from './RickAndMortyCharacterTableLib';
@@ -9,6 +7,7 @@ import { CircleImage } from '../../../../components/CircleImage';
 import { useState } from 'react';
 import CharacterModal from '../CharacterModal/CharacterModal';
 import { TRickAndMortyCharacterTable } from './RickAndMortyCharacterTable.types';
+import { Character, CharacterKeys } from '../../../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types';
 
 const RickAndMortyCharacterTable = ({
   data,
@@ -27,6 +26,7 @@ const RickAndMortyCharacterTable = ({
   }
 
   const characterTableConfig = {
+    tableHeight: '75vh',
     bodyCellCallback: {
       [CharacterKeys.image]: (row: Character) => (
         <CircleImage alt={row.name} src={row[CharacterKeys.image]} />

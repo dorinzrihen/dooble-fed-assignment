@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import useRickAndMortyEpisode from '../../../../hooks/useRickAndMortyEpisode';
+import useRickAndMortyEpisode from '../../../../hooks/useRickAndMortyEpisode/useRickAndMortyEpisode';
 import { CharacterModalProps } from './CharacterModal.types';
 import { Modal } from '../../../../components/Modal';
 import './CharacterModal.css';
