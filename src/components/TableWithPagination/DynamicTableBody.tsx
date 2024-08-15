@@ -15,7 +15,7 @@ const DynamicTableBody = <TRow,>({
     return (
       <TableBody>
         <TableRow>
-          <TableCell colSpan={headers.length} align="center" sx={{ padding: 0, height: `calc(${tableHeight} - 57px)` }}>
+          <TableCell colSpan={headers.length} align="center" sx={{ padding: 0, height: `calc(${tableHeight} - 60px)` }}>
             {
               error
                 ? <Typography variant="h4">{error}</Typography>

@@ -13,6 +13,7 @@ import { capitalize } from 'lodash';
 import { ChangeEvent } from 'react';
 import DynamicTableBody from './DynamicTableBody';
 import { getMaxTableHeight } from './TableWithPaginationLib';
+import { colors } from '../../context/theme';
 
 const TableWithPagination = <TRow,>({
   pages,
@@ -34,9 +35,9 @@ const TableWithPagination = <TRow,>({
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px'}}>
       <TableContainer
         component={Paper}
-        style={{ maxHeight: maxTableSize, height: maxTableSize }}
+        sx={{ maxHeight: maxTableSize, height: maxTableSize}}
       >
-        <Table stickyHeader style={{ tableLayout: 'fixed' }}>
+        <Table stickyHeader sx={{ tableLayout: 'fixed' }}>
           <TableHead>
             <TableRow>
               {headers.map((header) => {
@@ -46,7 +47,7 @@ const TableWithPagination = <TRow,>({
                     ? headerCellCallback[header]
                     : null;
                 return (
-                  <TableCell key={`header-cell-${value}`}>
+                  <TableCell key={`header-cell-${value}`} sx={{ backgroundColor: colors.tableHeader }}>
                     {valueFromCallback
                       ? valueFromCallback(value)
                       : capitalize(value)}
