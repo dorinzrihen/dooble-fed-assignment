@@ -1,8 +1,8 @@
-import { CharacterResponse } from "../../RickAndMortyCharacterPage.types"
+import { CharacterResponse } from '../../RickAndMortyCharacterPage.types';
 
 export type TRickAndMortyCharacterTable = {
-    data: CharacterResponse
-    isPending: boolean
-    page: number
-    onPageChange: (pageNumber: number) => void
-}
+  data: CharacterResponse;
+  isPending: boolean;
+  page: number;
+  onPageChange: (pageNumber: number) => void;
+};

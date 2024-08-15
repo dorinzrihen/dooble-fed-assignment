@@ -1,4 +1,4 @@
-import { FiltersEnum } from "./RickAndMortyCharacterPage.types";
+import { FiltersEnum } from './RickAndMortyCharacterPage.types';
 
 export const filtersInitState = {
   [FiltersEnum.name]: '',

@@ -9,7 +9,6 @@ import './CharacterFilterTable.css';
 import { genderOptions, statusOptions } from './CharacterFilterTableLib';
 import { TCharacterFilterTable } from './CharacterFilterTable.types';
 
-
 const CharacterFilterTable = ({
   onChangeFilters,
   handleClearFilters,
@@ -31,8 +30,8 @@ const CharacterFilterTable = ({
 
   const onClickClearAll = () => {
     setSearch('');
-    handleClearFilters()
-  }
+    handleClearFilters();
+  };
 
   return (
     <div className="characterFilterTable">
@@ -54,13 +53,17 @@ const CharacterFilterTable = ({
         <SelectMenu
           value={filters.gender}
           label="Gender"
-          onChange={(value: string) => onChangeFilters(FiltersEnum.gender, value)}
+          onChange={(value: string) =>
+            onChangeFilters(FiltersEnum.gender, value)
+          }
           options={genderOptions}
         />
         <SelectMenu
           value={filters.status}
           label="Status"
-          onChange={(value: string) => onChangeFilters(FiltersEnum.status, value)}
+          onChange={(value: string) =>
+            onChangeFilters(FiltersEnum.status, value)
+          }
           options={statusOptions}
         />
         <Button label={'Clear All'} onClick={onClickClearAll} />

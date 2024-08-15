@@ -1,17 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
 
 const useRickAndMortyEpisodes = (endpoint: string | undefined) => {
-    return useQuery({
-        queryKey: ['episodes', endpoint],
-        queryFn: async () => {
-            if(endpoint) {
-                const res = await fetch(endpoint);
-                return await res.json();
-            }
+  return useQuery({
+    queryKey: ['episodes', endpoint],
+    queryFn: async () => {
+      if (endpoint) {
+        const res = await fetch(endpoint);
+        return await res.json();
+      }
+    },
+    enabled: !!endpoint,
+  });
+};
 
-        },
-        enabled: !!endpoint,
-    });
-}
-
-export default useRickAndMortyEpisodes
+export default useRickAndMortyEpisodes;

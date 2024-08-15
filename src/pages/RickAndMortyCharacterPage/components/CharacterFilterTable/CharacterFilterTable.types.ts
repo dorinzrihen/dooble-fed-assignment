@@ -1,7 +1,7 @@
-import { FiltersEnum, TFilters } from "../../RickAndMortyCharacterPage.types";
+import { FiltersEnum, TFilters } from '../../RickAndMortyCharacterPage.types';
 
 export type TCharacterFilterTable = {
-    onChangeFilters: (key: keyof typeof FiltersEnum, value: string) => void;
-    handleClearFilters: () => void;
-    filters: TFilters;
+  onChangeFilters: (key: keyof typeof FiltersEnum, value: string) => void;
+  handleClearFilters: () => void;
+  filters: TFilters;
 };

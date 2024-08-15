@@ -1,3 +1,3 @@
-import TableWithPagination from './TableWithPagination'
+import TableWithPagination from './TableWithPagination';
 
-export { TableWithPagination }
+export { TableWithPagination };

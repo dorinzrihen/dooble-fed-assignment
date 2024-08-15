@@ -16,8 +16,8 @@ export const CharacterKeys = {
 export const FiltersEnum = {
   name: 'name',
   gender: 'gender',
-  status: 'status'
-} as const
+  status: 'status',
+} as const;
 
 export const StatusEnum = {
   Alive: 'Alive',
@@ -63,7 +63,10 @@ export type CharacterValidResponse = {
   results: TCharacter[];
 };
 
-export type CharacterResponse = CharacterValidResponse | { error: string } | undefined;
+export type CharacterResponse =
+  | CharacterValidResponse
+  | { error: string }
+  | undefined;
 
 export type TFilters = {
   [FiltersEnum.name]: string;
@@ -71,6 +74,8 @@ export type TFilters = {
   [FiltersEnum.status]: string;
 };
 
-export const isValidCharacterResponse = ( response: CharacterResponse): response is CharacterValidResponse => {
-  return Boolean(response && 'info' in response && 'results' in response)
-}
+export const isValidCharacterResponse = (
+  response: CharacterResponse
+): response is CharacterValidResponse => {
+  return Boolean(response && 'info' in response && 'results' in response);
+};

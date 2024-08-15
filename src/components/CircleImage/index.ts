@@ -1,3 +1,3 @@
-import CircleImage from "./CircleImage";
+import CircleImage from './CircleImage';
 
-export { CircleImage }
+export { CircleImage };

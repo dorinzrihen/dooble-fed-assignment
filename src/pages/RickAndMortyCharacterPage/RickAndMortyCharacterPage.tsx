@@ -1,11 +1,8 @@
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import CharacterFilterTable from './components/CharacterFilterTable/CharacterFilterTable';
-import {
-  FiltersEnum,
-  TFilters,
-} from './RickAndMortyCharacterPage.types';
+import { FiltersEnum, TFilters } from './RickAndMortyCharacterPage.types';
 import { useState } from 'react';
-import './RickAndMortyCharacterPage.css'
+import './RickAndMortyCharacterPage.css';
 import RickAndMortyCharacterTable from './components/RickAndMortyCharacterTable/RickAndMortyCharacterTable';
 import { filtersInitState } from './RickAndMortyCharacterPageLib';
 import useRickAndMortyCharacter from '../../hooks/useRickAndMortyCharacter';
@@ -27,7 +24,7 @@ const RickAndMortyCharacterPage = () => {
   const handleClearFilters = () => setFilters(filtersInitState);
 
   return (
-    <div className='rickAndMortyCharacterPage'>
+    <div className="rickAndMortyCharacterPage">
       <div>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
@@ -39,7 +36,7 @@ const RickAndMortyCharacterPage = () => {
           </AppBar>
         </Box>
       </div>
-      <div className='pageBody'>
+      <div className="pageBody">
         <CharacterFilterTable
           onChangeFilters={onChangeFilters}
           handleClearFilters={handleClearFilters}

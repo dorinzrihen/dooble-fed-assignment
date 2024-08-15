@@ -20,14 +20,18 @@ const TableWithPagination = <TRow,>({
   headers,
   page,
   error,
-  isPending
+  isPending,
 }: TTableWithPagination<TRow>) => {
-  const onPaginationChange = (_: ChangeEvent<unknown> | null, page: number) => onPageChange(page);
-  const headerCellCallback = config?.headerCellCallback
+  const onPaginationChange = (_: ChangeEvent<unknown> | null, page: number) =>
+    onPageChange(page);
+  const headerCellCallback = config?.headerCellCallback;
 
   return (
     <>
-      <TableContainer component={Paper} style={{ maxHeight: '75vh', height: '75vh' }} >
+      <TableContainer
+        component={Paper}
+        style={{ maxHeight: '75vh', height: '75vh' }}
+      >
         <Table stickyHeader style={{ height: '100%', tableLayout: 'fixed' }}>
           <TableHead>
             <TableRow>
@@ -39,25 +43,31 @@ const TableWithPagination = <TRow,>({
                     : null;
                 return (
                   <TableCell key={`header-cell-${value}`}>
-                    {valueFromCallback ? valueFromCallback(value) : capitalize(value)}
+                    {valueFromCallback
+                      ? valueFromCallback(value)
+                      : capitalize(value)}
                   </TableCell>
                 );
               })}
             </TableRow>
           </TableHead>
-          <DynamicTableBody<TRow> rows={rows} headers={headers} error={error} isPending={isPending} config={config}/>
+          <DynamicTableBody<TRow>
+            rows={rows}
+            headers={headers}
+            error={error}
+            isPending={isPending}
+            config={config}
+          />
         </Table>
       </TableContainer>
-      {count
-        ? <Pagination
+      {count ? (
+        <Pagination
           page={page}
           count={count}
           size="small"
           onChange={onPaginationChange}
         />
-        : null
-      }
-
+      ) : null}
     </>
   );
 };

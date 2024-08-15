@@ -1,5 +1,5 @@
 export type TCircleImage = {
-    src: string
-    size?: number
-    alt: string
-}
+  src: string;
+  size?: number;
+  alt: string;
+};

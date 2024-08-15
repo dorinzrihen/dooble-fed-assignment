@@ -1,7 +1,7 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react';
 
 export type TModal = {
-    open: boolean
-    onClose: () => void
-    children: ReactNode
-}
+  open: boolean;
+  onClose: () => void;
+  children: ReactNode;
+};
