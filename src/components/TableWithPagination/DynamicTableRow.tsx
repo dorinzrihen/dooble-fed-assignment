@@ -23,7 +23,9 @@ const DynamicTableRow = <TRow,>({
         const defaultValue = row[key] as ReactNode;
         return (
           <TableCell key={`cell-${defaultValue}-${cellKey}`}>
-            {valueFromCallback ? valueFromCallback(row, cellKey) : defaultValue}
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              {valueFromCallback ? valueFromCallback(row, cellKey) : defaultValue}
+            </div>
           </TableCell>
         );
       })}
