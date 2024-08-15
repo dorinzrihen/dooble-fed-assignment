@@ -13,7 +13,7 @@ type Config<TRow> = {
 };
 
 export type TableWithPaginationProps<TRow> = {
-  count: number | null;
+  pages: number | null;
   onPageChange: (pageNumber: number) => void;
   rows: TRow[] | null;
   config?: Config<TRow>;
@@ -21,11 +21,6 @@ export type TableWithPaginationProps<TRow> = {
   page: number;
   isPending: boolean;
   error: string | null;
-};
-
-export type TableRowErrorProps = {
-  colSpan: number;
-  text: string;
 };
 
 export type DynamicTableRowProps<TRow> = {

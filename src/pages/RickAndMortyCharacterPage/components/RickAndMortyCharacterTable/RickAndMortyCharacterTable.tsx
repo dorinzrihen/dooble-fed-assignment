@@ -1,4 +1,4 @@
-import TableWithPagination from '../../../../components/TableWithPagination/TableWithPagination';
+import { TableWithPagination } from '../../../../components/TableWithPagination';
 import {
   Character,
   CharacterKeys,
@@ -16,15 +16,15 @@ const RickAndMortyCharacterTable = ({
   page,
   onPageChange,
 }: TRickAndMortyCharacterTable) => {
-  let count = null;
-  let results = null;
+  const [selectedRow, setSelectedRow] = useState<Character | null>(null);
+  let pages: null | number = null;
+  let results: null | Character[] = null;
   const error = (data && 'error' in data && data['error']) || null;
 
   if (isValidCharacterResponse(data)) {
-    count = data.info.count;
+    pages = data.info.pages;
     results = data.results;
   }
-  const [selectedRow, setSelectedRow] = useState<Character | null>(null);
 
   const characterTableConfig = {
     bodyCellCallback: {
@@ -42,7 +42,7 @@ const RickAndMortyCharacterTable = ({
   return (
     <>
       <TableWithPagination<Character>
-        count={count}
+        pages={pages}
         page={page}
         onPageChange={onPageChange}
         rows={results}

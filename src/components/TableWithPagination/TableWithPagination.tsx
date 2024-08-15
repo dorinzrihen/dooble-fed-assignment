@@ -1,4 +1,5 @@
 import {
+  Box,
   Pagination,
   Paper,
   Table,
@@ -11,9 +12,10 @@ import { TableWithPaginationProps } from './TableWithPagination.types';
 import { capitalize } from 'lodash';
 import { ChangeEvent } from 'react';
 import DynamicTableBody from './DynamicTableBody';
+import { getMaxTableHeight } from './TableWithPaginationLib';
 
 const TableWithPagination = <TRow,>({
-  count,
+  pages,
   onPageChange,
   rows,
   config,
@@ -26,13 +28,15 @@ const TableWithPagination = <TRow,>({
     onPageChange(page);
   const headerCellCallback = config?.headerCellCallback;
 
+  const maxTableSize = getMaxTableHeight()
+
   return (
-    <>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px'}}>
       <TableContainer
         component={Paper}
-        style={{ maxHeight: '75vh', height: '75vh' }}
+        style={{ maxHeight: maxTableSize, height: maxTableSize }}
       >
-        <Table stickyHeader style={{ height: '100%', tableLayout: 'fixed' }}>
+        <Table stickyHeader style={{ tableLayout: 'fixed' }}>
           <TableHead>
             <TableRow>
               {headers.map((header) => {
@@ -60,15 +64,16 @@ const TableWithPagination = <TRow,>({
           />
         </Table>
       </TableContainer>
-      {count ? (
+      {pages ? (
         <Pagination
+          sx={{ alignSelf: 'flex-end'}}
           page={page}
-          count={count}
+          count={pages}
           size="small"
           onChange={onPaginationChange}
         />
       ) : null}
-    </>
+    </Box>
   );
 };
 

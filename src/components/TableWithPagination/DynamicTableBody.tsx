@@ -1,7 +1,7 @@
-import { TableBody, TableCell, TableRow } from '@mui/material';
-import TableRowError from './TableRowError';
+import { TableBody, TableCell, TableRow, Typography } from '@mui/material';
 import DynamicTableRow from './DynamicTableRow';
 import { DynamicTableBodyProps } from './TableWithPagination.types';
+import { getMaxTableHeight } from './TableWithPaginationLib';
 
 const DynamicTableBody = <TRow,>({
   headers,
@@ -10,15 +10,20 @@ const DynamicTableBody = <TRow,>({
   rows,
   isPending,
 }: DynamicTableBodyProps<TRow>) => {
-  if (isPending) {
+  if (isPending || error) {
+    const tableHeight = getMaxTableHeight()
     return (
       <TableBody>
         <TableRow>
-          <TableCell colSpan={headers.length} align="center">
-            <img
-              style={{ width: '100px', height: '100px' }}
-              src={'./portal-rick-and-morty.gif'}
-            />
+          <TableCell colSpan={headers.length} align="center" sx={{ padding: 0, height: `calc(${tableHeight} - 57px)` }}>
+            {
+              error
+                ? <Typography variant="h4">{error}</Typography>
+                : <img
+                  style={{ width: '100px', height: '100px' }}
+                  src={'./portal-rick-and-morty.gif'}
+                />
+            }
           </TableCell>
         </TableRow>
       </TableBody>
@@ -27,18 +32,14 @@ const DynamicTableBody = <TRow,>({
 
   return (
     <TableBody>
-      {error ? (
-        <TableRowError text={error} colSpan={headers.length} />
-      ) : (
-        rows?.map((row, index) => (
-          <DynamicTableRow
-            key={index}
-            row={row}
-            keys={headers}
-            config={config}
-          />
-        ))
-      )}
+      {rows?.map((row, index) => (
+        <DynamicTableRow
+          key={index}
+          row={row}
+          keys={headers}
+          config={config}
+        />
+      ))}
     </TableBody>
   );
 };
