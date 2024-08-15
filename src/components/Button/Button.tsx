@@ -3,7 +3,7 @@ import { TButton } from './Button.types';
 
 const Button = ({ label, onClick }: TButton) => {
   return (
-    <MuiButton onClick={onClick} variant="contained" size="large">
+    <MuiButton fullWidth onClick={onClick} variant="contained" size="large">
       {label}
     </MuiButton>
   );

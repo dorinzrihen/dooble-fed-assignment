@@ -1,6 +1,6 @@
 import TableWithPagination from '../../../../components/TableWithPagination/TableWithPagination';
 import {
-  TCharacter,
+  Character,
   CharacterKeys,
   isValidCharacterResponse,
 } from '../../RickAndMortyCharacterPage.types';
@@ -24,24 +24,24 @@ const RickAndMortyCharacterTable = ({
     count = data.info.count;
     results = data.results;
   }
-  const [selectedRow, setSelectedRow] = useState<TCharacter | null>(null);
+  const [selectedRow, setSelectedRow] = useState<Character | null>(null);
 
   const characterTableConfig = {
     bodyCellCallback: {
-      [CharacterKeys.image]: (row: TCharacter) => (
+      [CharacterKeys.image]: (row: Character) => (
         <CircleImage alt={row.name} src={row[CharacterKeys.image]} />
       ),
-      [CharacterKeys.origin]: (row: TCharacter) =>
+      [CharacterKeys.origin]: (row: Character) =>
         row[CharacterKeys.origin].name,
     },
     bodyRowCallback: {
-      onClick: (row: TCharacter) => setSelectedRow(row),
+      onClick: (row: Character) => setSelectedRow(row),
     },
   };
 
   return (
     <>
-      <TableWithPagination<TCharacter>
+      <TableWithPagination<Character>
         count={count}
         page={page}
         onPageChange={onPageChange}

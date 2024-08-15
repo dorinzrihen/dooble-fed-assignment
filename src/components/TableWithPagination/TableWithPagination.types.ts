@@ -12,7 +12,7 @@ type Config<TRow> = {
   };
 };
 
-export type TTableWithPagination<TRow> = {
+export type TableWithPaginationProps<TRow> = {
   count: number | null;
   onPageChange: (pageNumber: number) => void;
   rows: TRow[] | null;

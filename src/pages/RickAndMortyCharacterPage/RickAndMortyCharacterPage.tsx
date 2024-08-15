@@ -15,27 +15,28 @@ const RickAndMortyCharacterPage = () => {
 
   const onChangeFilters = (key: keyof typeof FiltersEnum, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
-  };
+  }
 
   const onPageChange = (newPageNumber: number) => {
     setPage(newPageNumber);
-  };
+  }
 
-  const handleClearFilters = () => setFilters(filtersInitState);
+  const handleClearFilters = () => {
+    setFilters(filtersInitState)
+    setPage(1)
+  }
 
   return (
     <div className="rickAndMortyCharacterPage">
-      <div>
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static">
-            <Toolbar>
-              <Typography variant="h6">
-                Rick and Morty Characters App
-              </Typography>
-            </Toolbar>
-          </AppBar>
-        </Box>
-      </div>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6">
+              Rick and Morty Characters App
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </Box>
       <div className="pageBody">
         <CharacterFilterTable
           onChangeFilters={onChangeFilters}

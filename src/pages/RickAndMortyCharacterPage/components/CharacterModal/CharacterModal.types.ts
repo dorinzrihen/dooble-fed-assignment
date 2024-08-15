@@ -1,6 +1,6 @@
-import { TCharacter } from '../../RickAndMortyCharacterPage.types';
+import { Character } from '../../RickAndMortyCharacterPage.types';
 
 export type CharacterModalProps = {
-  rowData: TCharacter;
+  rowData: Character;
   handleCloseModal: () => void;
 };

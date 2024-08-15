@@ -1,9 +1,9 @@
 import {
-  TCharacter,
+  Character,
   CharacterKeys,
 } from '../../RickAndMortyCharacterPage.types';
 
-export const TableHeadersEnum: Array<keyof TCharacter> = [
+export const TableHeadersEnum: Array<keyof Character> = [
   CharacterKeys.image,
   CharacterKeys.name,
   CharacterKeys.origin,

@@ -7,7 +7,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { TTableWithPagination } from './TableWithPagination.types';
+import { TableWithPaginationProps } from './TableWithPagination.types';
 import { capitalize } from 'lodash';
 import { ChangeEvent } from 'react';
 import DynamicTableBody from './DynamicTableBody';
@@ -21,7 +21,7 @@ const TableWithPagination = <TRow,>({
   page,
   error,
   isPending,
-}: TTableWithPagination<TRow>) => {
+}: TableWithPaginationProps<TRow>) => {
   const onPaginationChange = (_: ChangeEvent<unknown> | null, page: number) =>
     onPageChange(page);
   const headerCellCallback = config?.headerCellCallback;

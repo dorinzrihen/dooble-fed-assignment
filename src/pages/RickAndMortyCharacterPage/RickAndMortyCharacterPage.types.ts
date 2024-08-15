@@ -20,19 +20,19 @@ export const FiltersEnum = {
 } as const;
 
 export const StatusEnum = {
-  Alive: 'Alive',
-  Dead: 'Dead',
+  alive: 'alive',
+  dead: 'dead',
   unknown: 'unknown',
 } as const;
 
 export const GenderEnum = {
-  Female: 'Female',
-  Male: 'Male',
-  Genderless: 'Genderless',
+  female: 'female',
+  male: 'male',
+  genderless: 'genderless',
   unknown: 'unknown',
 } as const;
 
-export type TCharacter = {
+export type Character = {
   [CharacterKeys.id]: number;
   [CharacterKeys.name]: string;
   [CharacterKeys.status]: keyof typeof StatusEnum;
@@ -60,7 +60,7 @@ export type CharacterValidResponse = {
     next: string | null;
     prev: string | null;
   };
-  results: TCharacter[];
+  results: Character[];
 };
 
 export type CharacterResponse =

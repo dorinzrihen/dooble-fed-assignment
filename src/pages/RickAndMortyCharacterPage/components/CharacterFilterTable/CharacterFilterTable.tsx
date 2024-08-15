@@ -1,19 +1,18 @@
-import { InputAdornment, TextField } from '@mui/material';
+import { Grid, InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { SelectMenu } from '../../../../components/Select';
-import Button from '../../../../components/Button/Button';
+import { Button } from '../../../../components/Button';
 import { FiltersEnum } from '../../RickAndMortyCharacterPage.types';
 import { ChangeEvent, useRef, useState } from 'react';
 import { debounce } from 'lodash';
-import './CharacterFilterTable.css';
 import { genderOptions, statusOptions } from './CharacterFilterTableLib';
-import { TCharacterFilterTable } from './CharacterFilterTable.types';
+import { CharacterFilterTableProps } from './CharacterFilterTable.types';
 
 const CharacterFilterTable = ({
   onChangeFilters,
   handleClearFilters,
   filters,
-}: TCharacterFilterTable) => {
+}: CharacterFilterTableProps) => {
   const [search, setSearch] = useState<string>('');
 
   const debouncedHandleChange = useRef(
@@ -22,7 +21,7 @@ const CharacterFilterTable = ({
     }, 1000)
   ).current;
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearch(value);
     debouncedHandleChange(value);
@@ -35,39 +34,47 @@ const CharacterFilterTable = ({
 
   return (
     <div className="characterFilterTable">
-      <TextField
-        fullWidth
-        value={search}
-        label="Search"
-        variant="outlined"
-        onChange={onChange}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-      />
-      <div className="headerSelectLine">
-        <SelectMenu
-          value={filters.gender}
-          label="Gender"
-          onChange={(value: string) =>
-            onChangeFilters(FiltersEnum.gender, value)
-          }
-          options={genderOptions}
-        />
-        <SelectMenu
-          value={filters.status}
-          label="Status"
-          onChange={(value: string) =>
-            onChangeFilters(FiltersEnum.status, value)
-          }
-          options={statusOptions}
-        />
-        <Button label={'Clear All'} onClick={onClickClearAll} />
-      </div>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            value={search}
+            label="Search"
+            variant="outlined"
+            onChange={onInputChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+        <Grid item xs={5}>
+          <SelectMenu
+            value={filters.gender}
+            label="Gender"
+            onChange={(value: string) =>
+              onChangeFilters(FiltersEnum.gender, value)
+            }
+            options={genderOptions}
+          />
+        </Grid>
+        <Grid item xs={5}>
+          <SelectMenu
+            value={filters.status}
+            label="Status"
+            onChange={(value: string) =>
+              onChangeFilters(FiltersEnum.status, value)
+            }
+            options={statusOptions}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Button label={'Clear All'} onClick={onClickClearAll} />
+        </Grid>
+      </Grid>
     </div>
   );
 };
