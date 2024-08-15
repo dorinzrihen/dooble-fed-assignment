@@ -1,3 +1,3 @@
 export const getMaxTableHeight = () => {
-    return '75vh'
-}
+  return '75vh';
+};

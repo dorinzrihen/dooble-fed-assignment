@@ -11,19 +11,23 @@ const DynamicTableBody = <TRow,>({
   isPending,
 }: DynamicTableBodyProps<TRow>) => {
   if (isPending || error) {
-    const tableHeight = getMaxTableHeight()
+    const tableHeight = getMaxTableHeight();
     return (
       <TableBody>
         <TableRow>
-          <TableCell colSpan={headers.length} align="center" sx={{ padding: 0, height: `calc(${tableHeight} - 60px)` }}>
-            {
-              error
-                ? <Typography variant="h4">{error}</Typography>
-                : <img
-                  style={{ width: '100px', height: '100px' }}
-                  src={'./portal-rick-and-morty.gif'}
-                />
-            }
+          <TableCell
+            colSpan={headers.length}
+            align="center"
+            sx={{ padding: 0, height: `calc(${tableHeight} - 60px)` }}
+          >
+            {error ? (
+              <Typography variant="h4">{error}</Typography>
+            ) : (
+              <img
+                style={{ width: '100px', height: '100px' }}
+                src={'./portal-rick-and-morty.gif'}
+              />
+            )}
           </TableCell>
         </TableRow>
       </TableBody>
@@ -33,12 +37,7 @@ const DynamicTableBody = <TRow,>({
   return (
     <TableBody>
       {rows?.map((row, index) => (
-        <DynamicTableRow
-          key={index}
-          row={row}
-          keys={headers}
-          config={config}
-        />
+        <DynamicTableRow key={index} row={row} keys={headers} config={config} />
       ))}
     </TableBody>
   );

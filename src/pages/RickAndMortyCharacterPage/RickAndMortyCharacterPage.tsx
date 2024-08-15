@@ -16,16 +16,16 @@ const RickAndMortyCharacterPage = () => {
   const onChangeFilters = (key: keyof typeof FiltersEnum, value: string) => {
     setPage(1);
     setFilters((prev) => ({ ...prev, [key]: value }));
-  }
+  };
 
   const onPageChange = (newPageNumber: number) => {
     setPage(newPageNumber);
-  }
+  };
 
   const handleClearFilters = () => {
     setFilters(filtersInitState);
     setPage(1);
-  }
+  };
 
   return (
     <div className="rickAndMortyCharacterPage">

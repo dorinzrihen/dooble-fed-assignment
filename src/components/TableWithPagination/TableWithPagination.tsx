@@ -29,13 +29,13 @@ const TableWithPagination = <TRow,>({
     onPageChange(page);
   const headerCellCallback = config?.headerCellCallback;
 
-  const maxTableSize = getMaxTableHeight()
+  const maxTableSize = getMaxTableHeight();
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px'}}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
       <TableContainer
         component={Paper}
-        sx={{ maxHeight: maxTableSize, height: maxTableSize}}
+        sx={{ maxHeight: maxTableSize, height: maxTableSize }}
       >
         <Table stickyHeader sx={{ tableLayout: 'fixed' }}>
           <TableHead>
@@ -47,7 +47,10 @@ const TableWithPagination = <TRow,>({
                     ? headerCellCallback[header]
                     : null;
                 return (
-                  <TableCell key={`header-cell-${value}`} sx={{ backgroundColor: colors.tableHeader }}>
+                  <TableCell
+                    key={`header-cell-${value}`}
+                    sx={{ backgroundColor: colors.tableHeader }}
+                  >
                     {valueFromCallback
                       ? valueFromCallback(value)
                       : capitalize(value)}
@@ -67,7 +70,7 @@ const TableWithPagination = <TRow,>({
       </TableContainer>
       {pages ? (
         <Pagination
-          sx={{ alignSelf: 'flex-end'}}
+          sx={{ alignSelf: 'flex-end' }}
           page={page}
           count={pages}
           size="small"
