@@ -33,3 +33,11 @@ export type DynamicTableRowProps<TRow> = {
   keys: Array<keyof TRow>;
   config?: Config<TRow>;
 }
+
+export type DynamicTableBodyProps<TRow> = {
+  rows?: TRow[]
+  headers: Array<keyof TRow>;
+  config?: Config<TRow>;
+  error?: string;
+  isPending: boolean;
+}

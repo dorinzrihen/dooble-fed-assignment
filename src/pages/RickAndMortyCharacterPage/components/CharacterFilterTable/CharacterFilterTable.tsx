@@ -29,6 +29,11 @@ const CharacterFilterTable = ({
     debouncedHandleChange(value);
   };
 
+  const onClickClearAll = () => {
+    setSearch('');
+    handleClearFilters()
+  }
+
   return (
     <div className="characterFilterTable">
       <TextField
@@ -58,7 +63,7 @@ const CharacterFilterTable = ({
           onChange={(value: string) => onChangeFilters(FiltersEnum.status, value)}
           options={statusOptions}
         />
-        <Button label={'Clear All'} onClick={handleClearFilters} />
+        <Button label={'Clear All'} onClick={onClickClearAll} />
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const SelectMenu = ({ onChange, label, value, options }: TSelectMenu) => {
 
   return (
     <FormControl fullWidth>
-      <InputLabel>Gender</InputLabel>
+      <InputLabel>{label}</InputLabel>
       <Select value={value} label={label} onChange={handleChange}>
         {options.map(({ value, name }) => (
           <MenuItem key={value} value={value}>

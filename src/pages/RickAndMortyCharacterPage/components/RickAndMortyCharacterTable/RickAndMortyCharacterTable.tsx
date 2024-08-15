@@ -10,7 +10,7 @@ import {
 } from './RickAndMortyCharacterTableLib';
 import { CircleImage } from '../../../../components/CircleImage';
 import { useState } from 'react';
-import { Modal } from '../../../../components/Modal';
+import CharacterModal from '../CharacterModal/CharacterModal';
 
 
 type TRickAndMortyCharacterTable = {
@@ -47,9 +47,7 @@ const RickAndMortyCharacterTable = ({ queryResponse, page, onPageChange }: TRick
       isPending={isPending}
       error={data?.error}
     />
-    <Modal open={Boolean(selectedRow)} onClose={handleCloseModal}>
-      <div>dorin</div>
-    </Modal>
+    {selectedRow && <CharacterModal rowData={selectedRow} handleCloseModal={handleCloseModal} />}
   </>
 };
 

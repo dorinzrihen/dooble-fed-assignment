@@ -1,32 +1,14 @@
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import CharacterFilterTable from './components/CharacterFilterTable/CharacterFilterTable';
-import { useQuery } from '@tanstack/react-query';
 import {
   FiltersEnum,
-  TCharacterResponse,
   TFilters,
 } from './RickAndMortyCharacterPage.types';
 import { useState } from 'react';
 import './RickAndMortyCharacterPage.css'
 import RickAndMortyCharacterTable from './components/RickAndMortyCharacterTable/RickAndMortyCharacterTable';
 import { filtersInitState } from './RickAndMortyCharacterPageLib';
-
-const useRickAndMortyCharacter = (filters: TFilters, page: number) => {
-  return useQuery({
-    queryKey: ['character', filters, page],
-    queryFn: () => {
-      const params = new URLSearchParams(filters).toString();
-      return fetch(
-        `https://rickandmortyapi.com/api/character/?page=${page}&${params}`
-      ).then((res) => res.json());
-    },
-    staleTime: 1000 * 60,
-    select: (data: TCharacterResponse) => data.results.map(character => ({
-      ...character,
-      origin: character.origin.name
-    }))
-  });
-}
+import useRickAndMortyCharacter from '../../hooks/useRickAndMortyCharacter';
 
 const RickAndMortyCharacterPage = () => {
   const [filters, setFilters] = useState<TFilters>(filtersInitState);

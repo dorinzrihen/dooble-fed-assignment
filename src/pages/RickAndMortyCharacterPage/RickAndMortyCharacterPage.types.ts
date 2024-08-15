@@ -61,7 +61,6 @@ export type TCharacterResponse = {
     prev: string | null;
   };
   results: TCharacter[];
-  error?: string;
 };
 
 export type TFilters = {
