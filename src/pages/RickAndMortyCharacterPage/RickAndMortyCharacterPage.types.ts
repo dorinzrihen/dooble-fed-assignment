@@ -53,7 +53,7 @@ export type TCharacter = {
   [CharacterKeys.created]: string;
 };
 
-export type TCharacterResponse = {
+export type CharacterValidResponse = {
   info: {
     count: number;
     pages: number;
@@ -63,9 +63,14 @@ export type TCharacterResponse = {
   results: TCharacter[];
 };
 
+export type CharacterResponse = CharacterValidResponse | { error: string } | undefined;
+
 export type TFilters = {
   [FiltersEnum.name]: string;
   [FiltersEnum.gender]: string;
   [FiltersEnum.status]: string;
 };
 
+export const isValidCharacterResponse = ( response: CharacterResponse): response is CharacterValidResponse => {
+  return Boolean(response && 'info' in response && 'results' in response)
+}

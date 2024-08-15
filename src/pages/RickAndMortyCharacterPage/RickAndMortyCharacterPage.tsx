@@ -14,7 +14,7 @@ const RickAndMortyCharacterPage = () => {
   const [filters, setFilters] = useState<TFilters>(filtersInitState);
   const [page, setPage] = useState<number>(1);
 
-  const queryResponse = useRickAndMortyCharacter(filters, page);
+  const { data, isPending } = useRickAndMortyCharacter(filters, page);
 
   const onChangeFilters = (key: keyof typeof FiltersEnum, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
@@ -45,7 +45,12 @@ const RickAndMortyCharacterPage = () => {
           handleClearFilters={handleClearFilters}
           filters={filters}
         />
-        <RickAndMortyCharacterTable queryResponse={queryResponse} page={page} onPageChange={onPageChange} />
+        <RickAndMortyCharacterTable
+          data={data}
+          isPending={isPending}
+          page={page}
+          onPageChange={onPageChange}
+        />
       </div>
     </div>
   );

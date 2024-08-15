@@ -1,9 +1,8 @@
-import { UseQueryResult } from '@tanstack/react-query';
 import TableWithPagination from '../../../../components/TableWithPagination/TableWithPagination';
 import {
   TCharacter,
   CharacterKeys,
-  TCharacterResponse,
+  isValidCharacterResponse,
 } from '../../RickAndMortyCharacterPage.types';
 import {
   TableHeadersEnum,
@@ -11,17 +10,18 @@ import {
 import { CircleImage } from '../../../../components/CircleImage';
 import { useState } from 'react';
 import CharacterModal from '../CharacterModal/CharacterModal';
+import { TRickAndMortyCharacterTable } from './RickAndMortyCharacterTable.types';
 
+const RickAndMortyCharacterTable = ({ data, isPending, page, onPageChange }: TRickAndMortyCharacterTable) => {
+  let count = null;
+  let results = null;
+  const error = data && 'error' in data && data['error'] || null
 
-type TRickAndMortyCharacterTable = {
-  queryResponse: UseQueryResult<TCharacterResponse, Error>
-  page: number
-  onPageChange: (pageNumber: number) => void
-}
-
-const RickAndMortyCharacterTable = ({ queryResponse, page, onPageChange }: TRickAndMortyCharacterTable) => {
+  if (isValidCharacterResponse(data)) {
+    count = data.info.count
+    results = data.results
+  }
   const [selectedRow, setSelectedRow] = useState<TCharacter | null>(null)
-  const { data, isPending } = queryResponse
 
   const characterTableConfig = {
     bodyCellCallback: {
@@ -34,20 +34,18 @@ const RickAndMortyCharacterTable = ({ queryResponse, page, onPageChange }: TRick
     }
   };
 
-  const handleCloseModal = () => setSelectedRow(null)
-
   return <>
     <TableWithPagination<TCharacter>
-      count={data?.info?.pages}
+      count={count}
       page={page}
       onPageChange={onPageChange}
-      rows={data?.results}
+      rows={results}
       headers={TableHeadersEnum}
       config={characterTableConfig}
       isPending={isPending}
-      error={data?.error}
+      error={error}
     />
-    {selectedRow && <CharacterModal rowData={selectedRow} handleCloseModal={handleCloseModal} />}
+    {selectedRow && <CharacterModal rowData={selectedRow} handleCloseModal={() => setSelectedRow(null)} />}
   </>
 };
 

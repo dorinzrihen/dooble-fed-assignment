@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { TFilters } from "../pages/RickAndMortyCharacterPage/RickAndMortyCharacterPage.types";
+import { CharacterResponse, TFilters } from "../pages/RickAndMortyCharacterPage/RickAndMortyCharacterPage.types";
 
 const useRickAndMortyCharacter = (filters: TFilters, page: number) => {
-    return useQuery({
+    return useQuery<CharacterResponse>({
         queryKey: ['character', filters, page],
         queryFn: async () => {
             const params = new URLSearchParams(filters).toString();
@@ -11,7 +11,6 @@ const useRickAndMortyCharacter = (filters: TFilters, page: number) => {
             );
             return await res.json();
         },
-        staleTime: 1000 * 60,
     });
 }
 

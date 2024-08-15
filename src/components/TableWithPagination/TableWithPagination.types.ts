@@ -13,14 +13,14 @@ type Config<TRow> = {
 };
 
 export type TTableWithPagination<TRow> = {
-  count?: number;
+  count: number | null;
   onPageChange: (pageNumber: number) => void;
-  rows?: TRow[];
+  rows: TRow[] | null;
   config?: Config<TRow>;
   headers: Array<keyof TRow>;
   page: number;
   isPending: boolean
-  error?: string
+  error: string | null
 };
 
 export type TableRowErrorProps = {
@@ -35,9 +35,9 @@ export type DynamicTableRowProps<TRow> = {
 }
 
 export type DynamicTableBodyProps<TRow> = {
-  rows?: TRow[]
+  rows: TRow[] | null
   headers: Array<keyof TRow>;
   config?: Config<TRow>;
-  error?: string;
+  error?: string | null;
   isPending: boolean;
 }

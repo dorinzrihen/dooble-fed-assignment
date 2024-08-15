@@ -48,7 +48,7 @@ const TableWithPagination = <TRow,>({
           <DynamicTableBody<TRow> rows={rows} headers={headers} error={error} isPending={isPending} config={config}/>
         </Table>
       </TableContainer>
-      {!error
+      {count
         ? <Pagination
           page={page}
           count={count}
