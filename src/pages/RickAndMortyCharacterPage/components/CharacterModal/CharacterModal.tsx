@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import useRickAndMortyEpisode from '../../../../hooks/useRickAndMortyEpisode';
 import { CharacterModalProps } from './CharacterModal.types';
 import { Modal } from '../../../../components/Modal';
-import './CharacterModal.css'
+import './CharacterModal.css';
 
 const CharacterModal = ({ rowData, handleCloseModal }: CharacterModalProps) => {
   const { data: firstEpisode, isPending: isPendingFirstEpisode } =
@@ -12,12 +12,9 @@ const CharacterModal = ({ rowData, handleCloseModal }: CharacterModalProps) => {
 
   return (
     <Modal open={Boolean(rowData)} onClose={handleCloseModal}>
-      <div className='characterModalContainer'>
-        <img
-          src={rowData.image}
-          alt={`${rowData.name}`}
-        />
-        <div className='content'>
+      <div className="characterModalContainer">
+        <img src={rowData.image} alt={`${rowData.name}`} />
+        <div className="content">
           <Typography variant="h5">{rowData.name}</Typography>
           {!isPendingFirstEpisode && !isPendingLastEpisode ? (
             <>
@@ -28,7 +25,7 @@ const CharacterModal = ({ rowData, handleCloseModal }: CharacterModalProps) => {
                 Last Appearance: {lastEpisode.episode}
               </Typography>
             </>
-        ) : null}
+          ) : null}
         </div>
       </div>
     </Modal>
