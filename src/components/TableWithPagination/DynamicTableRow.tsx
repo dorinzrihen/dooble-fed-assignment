@@ -19,11 +19,11 @@ const DynamicTableRow = <TRow,>({
           bodyCellCallback && key in bodyCellCallback
             ? bodyCellCallback[key]
             : null;
-        const value = key.toString();
+        const cellKey = key.toString();
         const defaultValue = row[key] as ReactNode;
         return (
-          <TableCell key={`cell-${defaultValue}-${value}`}>
-            {valueFromCallback ? valueFromCallback(row, value) : defaultValue}
+          <TableCell key={`cell-${defaultValue}-${cellKey}`}>
+            {valueFromCallback ? valueFromCallback(row, cellKey) : defaultValue}
           </TableCell>
         );
       })}
