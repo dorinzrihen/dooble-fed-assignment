@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export type TModal = {
+export type ModalProps = {
   open: boolean;
   onClose: () => void;
   children: ReactNode;

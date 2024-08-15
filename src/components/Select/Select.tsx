@@ -1,8 +1,8 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material';
-import { TSelectMenu } from './Select.types';
+import { SelectMenuProps } from './Select.types';
 
-const SelectMenu = ({ onChange, label, value, options }: TSelectMenu) => {
+const SelectMenu = ({ onChange, label, value, options }: SelectMenuProps) => {
   const handleChange = (event: SelectChangeEvent) => {
     onChange(event.target.value);
   };

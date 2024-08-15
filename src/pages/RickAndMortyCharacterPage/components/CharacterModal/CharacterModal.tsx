@@ -1,6 +1,8 @@
-import { Modal, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import useRickAndMortyEpisode from '../../../../hooks/useRickAndMortyEpisode';
 import { CharacterModalProps } from './CharacterModal.types';
+import { Modal } from '../../../../components/Modal';
+import './CharacterModal.css'
 
 const CharacterModal = ({ rowData, handleCloseModal }: CharacterModalProps) => {
   const { data: firstEpisode, isPending: isPendingFirstEpisode } =
@@ -10,25 +12,24 @@ const CharacterModal = ({ rowData, handleCloseModal }: CharacterModalProps) => {
 
   return (
     <Modal open={Boolean(rowData)} onClose={handleCloseModal}>
-      <div
-        style={{ width: '300px', height: '400px', backgroundColor: 'white' }}
-      >
+      <div className='characterModalContainer'>
         <img
-          style={{ width: '100%' }}
           src={rowData.image}
           alt={`${rowData.name}`}
         />
-        <Typography variant="h4">{rowData.name}</Typography>
-        {!isPendingFirstEpisode && !isPendingLastEpisode ? (
-          <>
-            <Typography variant="body1">
-              First Appearance: {firstEpisode.episode}
-            </Typography>
-            <Typography variant="body1">
-              Last Appearance: {lastEpisode.episode}
-            </Typography>
-          </>
+        <div className='content'>
+          <Typography variant="h5">{rowData.name}</Typography>
+          {!isPendingFirstEpisode && !isPendingLastEpisode ? (
+            <>
+              <Typography variant="body1">
+                First Appearance: {firstEpisode.episode}
+              </Typography>
+              <Typography variant="body1">
+                Last Appearance: {lastEpisode.episode}
+              </Typography>
+            </>
         ) : null}
+        </div>
       </div>
     </Modal>
   );

@@ -18,6 +18,15 @@ const theme = createTheme({
                 },
             },
         },
+        MuiModal: {
+            styleOverrides: {
+                root: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                },
+            },
+        },
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {

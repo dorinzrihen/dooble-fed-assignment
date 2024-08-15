@@ -1,17 +1,10 @@
-import { TModal } from './Modal.types';
+import { ModalProps } from './Modal.types';
 import { Box, Modal as MuiModal } from '@mui/material';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-};
-
-const Modal = ({ open, onClose, children }: TModal) => {
+const Modal = ({ open, onClose, children }: ModalProps) => {
   return (
     <MuiModal open={open} onClose={onClose}>
-      <Box sx={style}>{children}</Box>
+      <Box>{children}</Box>
     </MuiModal>
   );
 };

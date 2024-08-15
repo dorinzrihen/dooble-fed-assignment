@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export type TButton = {
+export type ButtonProps = {
   label: ReactNode;
   onClick: () => void;
 };

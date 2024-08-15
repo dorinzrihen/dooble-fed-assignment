@@ -1,4 +1,4 @@
-export type TSelectMenu = {
+export type SelectMenuProps = {
   onChange: (value: string) => void;
   label: string;
   value: string;

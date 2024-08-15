@@ -1,7 +1,7 @@
 import { Button as MuiButton } from '@mui/material';
-import { TButton } from './Button.types';
+import { ButtonProps } from './Button.types';
 
-const Button = ({ label, onClick }: TButton) => {
+const Button = ({ label, onClick }: ButtonProps) => {
   return (
     <MuiButton fullWidth onClick={onClick} variant="contained" size="large">
       {label}

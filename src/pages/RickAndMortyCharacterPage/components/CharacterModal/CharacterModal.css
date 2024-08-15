@@ -1,0 +1,10 @@
+.characterModalContainer {
+    width: 300px;
+    min-height: 400px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.characterModalContainer > .content {
+    margin: 10px;
+}
