@@ -14,3 +14,10 @@ npm install
 
 3.Start the development server:
 npm run dev
+
+
+
+
+https://github.com/user-attachments/assets/dd59ab5d-e64e-43af-ac65-753e92fdeb3f
+
+
