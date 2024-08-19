@@ -1,3 +1,4 @@
+import { GridColDef } from '@mui/x-data-grid';
 import { ReactNode } from 'react';
 
 type Config<TRow> = {
@@ -15,7 +16,7 @@ type Config<TRow> = {
 
 export type DynamicTableBodyProps<TRow> = {
   rows: TRow[] | null;
-  headers: Array<keyof TRow>;
+  columns: GridColDef[];
   config: Config<TRow>;
   error: string | null;
   isPending: boolean;

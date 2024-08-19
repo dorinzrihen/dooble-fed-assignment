@@ -49,13 +49,6 @@ const theme = createTheme({
         },
       },
     },
-    MuiTableCell: {
-      styleOverrides: {
-        root: {
-          width: '100px',
-        },
-      },
-    },
     MuiButton: {
       styleOverrides: {
         root: {

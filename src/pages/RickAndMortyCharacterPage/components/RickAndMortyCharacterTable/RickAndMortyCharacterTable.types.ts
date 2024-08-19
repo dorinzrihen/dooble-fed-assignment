@@ -1,6 +1,6 @@
 import { CharacterResponse } from '../../../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types';
 
-export type TRickAndMortyCharacterTable = {
+export type RickAndMortyCharacterProps = {
   data: CharacterResponse;
   isPending: boolean;
   page: number;

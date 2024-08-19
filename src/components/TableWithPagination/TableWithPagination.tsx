@@ -1,72 +1,47 @@
 import {
   Box,
   Pagination,
-  Paper,
-  Table,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
 } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
 import { TableWithPaginationProps } from './TableWithPagination.types';
-import { capitalize } from 'lodash';
 import { ChangeEvent } from 'react';
-import DynamicTableBody from './DynamicTableBody';
-import { colors } from '../../context/theme';
 
 const TableWithPagination = <TRow,>({
   pages,
   onPageChange,
   rows,
-  config,
-  headers,
+  columns,
   page,
-  error,
   isPending,
+  error
 }: TableWithPaginationProps<TRow>) => {
   const onPaginationChange = (_: ChangeEvent<unknown> | null, page: number) =>
     onPageChange(page);
-  const headerCellCallback = config?.headerCellCallback;
 
-  const maxTableSize = config.tableHeight;
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-      <TableContainer
-        component={Paper}
-        sx={{ maxHeight: maxTableSize, height: maxTableSize }}
-      >
-        <Table stickyHeader sx={{ tableLayout: 'fixed' }}>
-          <TableHead>
-            <TableRow>
-              {headers.map((header) => {
-                const value = header.toString();
-                const valueFromCallback =
-                  headerCellCallback && header in headerCellCallback
-                    ? headerCellCallback[header]
-                    : null;
-                return (
-                  <TableCell
-                    key={`header-cell-${value}`}
-                    sx={{ backgroundColor: colors.tableHeader }}
-                  >
-                    {valueFromCallback
-                      ? valueFromCallback(value)
-                      : capitalize(value)}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          </TableHead>
-          <DynamicTableBody<TRow>
-            rows={rows}
-            headers={headers}
-            error={error}
-            isPending={isPending}
-            config={config}
-          />
-        </Table>
-      </TableContainer>
+    <Box sx={{ height: 1, width: '100%' }}>
+      <DataGrid
+        rows={rows ?? []}
+        columns={columns}
+        hideFooterPagination
+        hideFooter
+        disableColumnMenu
+        loading={isPending}
+        localeText={{ noRowsLabel: error?.toString()}}
+        sx={{
+          height: {
+            xs: '60vh', 
+            sm: '70vh',
+            md: '75vh',
+          },
+          '& .MuiDataGrid-cell': {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        }}
+      />
       {pages ? (
         <Pagination
           sx={{ alignSelf: 'flex-end' }}

@@ -4,18 +4,20 @@ import { TableHeadersEnum } from './RickAndMortyCharacterTableLib';
 import { CircleImage } from '../../../../components/CircleImage';
 import { useState } from 'react';
 import CharacterModal from '../CharacterModal/CharacterModal';
-import { TRickAndMortyCharacterTable } from './RickAndMortyCharacterTable.types';
+import { RickAndMortyCharacterProps } from './RickAndMortyCharacterTable.types';
 import {
   Character,
   CharacterKeys,
 } from '../../../../hooks/useRickAndMortyCharacter/useRickAndMortyCharacter.types';
+import { capitalize } from 'lodash';
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
 const RickAndMortyCharacterTable = ({
   data,
   isPending,
   page,
   onPageChange,
-}: TRickAndMortyCharacterTable) => {
+}: RickAndMortyCharacterProps) => {
   const [selectedRow, setSelectedRow] = useState<Character | null>(null);
   let pages: null | number = null;
   let results: null | Character[] = null;
@@ -26,19 +28,35 @@ const RickAndMortyCharacterTable = ({
     results = data.results;
   }
 
+  const bodyCellCallback: Partial<Record<keyof Character, (params: GridRenderCellParams<Character>) => JSX.Element | string>> = {
+    [CharacterKeys.image]: (params: GridRenderCellParams<Character>) => {
+      const { name, image } = params.row
+      return <CircleImage alt={name} src={image} />
+    },
+    [CharacterKeys.origin]: (params: GridRenderCellParams<Character>) => {
+      return params.formattedValue.name
+    }
+  }
+
   const characterTableConfig = {
     tableHeight: '75vh',
-    bodyCellCallback: {
-      [CharacterKeys.image]: (row: Character) => (
-        <CircleImage alt={row.name} src={row[CharacterKeys.image]} />
-      ),
-      [CharacterKeys.origin]: (row: Character) =>
-        row[CharacterKeys.origin].name,
-    },
     bodyRowCallback: {
       onClick: (row: Character) => setSelectedRow(row),
     },
   };
+
+  const columns = TableHeadersEnum.map(header => {
+    const renderCell = header in bodyCellCallback ? bodyCellCallback[header as keyof Character] : undefined;
+
+    return {
+      field: header,
+      headerName: capitalize(header),
+      flex: 1,
+      sortable: false,
+      headerAlign: 'center',
+      ...(renderCell ? { renderCell } : {})
+    }
+  }) as GridColDef[]
 
   return (
     <>
@@ -47,7 +65,7 @@ const RickAndMortyCharacterTable = ({
         page={page}
         onPageChange={onPageChange}
         rows={results}
-        headers={TableHeadersEnum}
+        columns={columns}
         config={characterTableConfig}
         isPending={isPending}
         error={error}
